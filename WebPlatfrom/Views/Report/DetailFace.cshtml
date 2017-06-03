@@ -1,0 +1,218 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <title>接口</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/manager.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/dataTables.bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div id="container-body">
+    <div class="container-header">
+        <div class="left">
+            <span class="breadcrumb-left">
+                <img src="~/Images/current.png" />当前位置 :
+            </span>
+            </div>
+            <div class="left">
+                <ol class="breadcrumb">
+                    <li class="active">接口</li>
+                    <li class="active">性能</li>
+                    <li class="active">人脸检测</li>
+                </ol>
+            </div>
+        <div class="divchoose">
+            <input type="text" id="inputshu" class="form-control" placeholder="请选择">
+            <a id="btncheck" class="btn btn-info ">查询</a>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="divdate">
+            <span class="spandate">起止时间 :</span>
+            <div class="input-group date form_date divleft" initialdate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" id="txtStart" size="16" type="text" value="" readonly>
+                <div class="input-group-addon">
+                    <div class="glyphicon glyphicon-time"></div>
+                </div>
+            </div>
+            <input type="hidden" id="dtp_input3" value="" />
+            <span class="divto">—</span>
+            <div class="input-group date form_date divright" initialdate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" id="txtEnd" size="16" type="text" value="" readonly>
+                <div class="input-group-addon">
+                    <div class="glyphicon glyphicon-time"></div>
+                </div>
+            </div>
+            <input type="hidden" id="dtp_input3" value="" />
+        </div>
+            @*<div class="input-group input-box">
+                <input type="text" class="form-control" id="inputsearch" placeholder="用户名称">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="btnsearch" onclick="onSearch();">
+                        <span class="glyphicon glyphicon-search" id="spansearch"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="input-group input-box input-search">
+                <input type="text" id="input-li" class="form-control" readonly="readonly" roleId="-1" placeholder="请选择">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" roleId="-1">---全部---</a></li>
+                        <li><a href="#" roleId="0">管理员</a></li>
+                        <li><a href="#" roleId="1">审核员</a></li>
+                    </ul>
+                </div>
+            </div>*@
+       
+        <div style="clear: both"></div>
+    </div>
+    <div class="container-header">
+        @*<div class="right-edit">
+
+            <a id="btnBuild" class="btn btn-info " onclick="onSearch()">
+                查询
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            </a>
+
+        </div>*@
+        <div style="clear: both"></div>
+    </div>
+    <div class="container-table">
+
+        @*<table class="table table-striped tabtr" id="tblUserList">
+            <thead>
+            <tr>
+                <th class="check-header hidden-xs">
+
+                </th>
+                <th>
+                    接口名称
+                </th>
+                <th>
+                    接口提供商
+                </th>
+                <th>
+                    调用时间
+                </th>
+                <th>
+                    调用人
+                </th>
+                <th>
+                    耗时
+                </th>
+                <th>
+                    结果
+                </th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>*@
+    </div>
+</div>
+<script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+<script src="~/JS/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+<script src="~/JS/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="~/JS/commondrop.js"></script>
+<script src="~/JS/dataTables.bootstrap.js"></script>
+<script src="~/JS/commonheight.js"></script>
+<script src="~/JS/public.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $(function() {
+        GetList();
+    });
+
+    function GetList() {
+
+        $(".container-table").html(' <table class="table table-striped tabtr" id="tblLogsList"></table>');
+        $("#tblLogsList").dataTable({
+            "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
+            "bServerSide": true, //是否启动服务器端数据导入
+            bLengthChange: false,//去掉每页多少条框体
+            "bJQueryUI": true, //是否使用 jQury的UI theme
+            "bAutoWidth": false, //是否自适应宽度
+            "bScrollCollapse": true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
+            "bFilter": false, //是否启动过滤、搜索功能
+            "ordering": false,  //去掉页头排序
+            "ajax": {
+                "url": "/Monitoring/GetFaceAPILogsList",
+                "type": "POST",
+                "data": { UserName: $("#inputsearch").val() }
+            },
+            "aoColumns": [
+                //{
+                //    "mDataProp": "DeviceKey", "sDefaultContent": "", "sClass": "center",
+                //    "render": function (data, type, full, meta) {
+                //        return '<input type="checkbox" name="checkbox"  class="checkchild"  value="' + data + '" />';
+                //    },
+                //    "bSortable": false
+                //},
+                {
+                    "mDataProp": "FunctionName",
+                    "sTitle": "接口名称",
+                    "sDefaultContent": "",
+                    "sClass": "center"
+                },
+                {
+                    "mDataProp": "ProviderUrl", "sTitle": "接口提供商", "sDefaultContent": "", "sClass": "center"
+                },
+                {
+                    "mDataProp": "CallTime", "sTitle": "调用时间", "sDefaultContent": "", "sClass": "center", render: function (data) {
+                        return convertTime(data, "yyyy-MM-dd hh:mm:ss");
+                    }
+                },
+                {
+                    "mDataProp": "UserName", "sTitle": "调用人", "sDefaultContent": "", "sClass": "center"
+                },
+                {
+                    "mDataProp": "UseTime",
+                    "sTitle": "耗时",
+                    "sDefaultContent": "",
+                    "sClass": "center"
+                },
+                {
+                    "mDataProp": "Result",
+                    "sTitle": "结果",
+                    "sDefaultContent": "",
+                    "sClass": "center", render: function (data) {
+                        return data == 1 ? "成功" : "失败";
+                    }
+                }
+
+            ], "language": {
+                "processing": "加载中...",
+                "lengthMenu": "每页显示 _MENU_ 条数据",
+                "zeroRecords": "没有匹配结果",
+                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "emptyTable": "没有匹配结果",
+                "loadingRecords": "载入中...",
+                "thousands": ",",
+                "paginate": {
+                    "first": "首页",
+                    "previous": "上一页",
+                    "next": "下一页",
+                    "last": "末页"
+                }
+            }
+        });
+
+    }
+    //查询
+    function onSearch() {
+        GetList();
+    }
+</script>
+</body>
+</html>

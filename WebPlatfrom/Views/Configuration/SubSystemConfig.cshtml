@@ -1,0 +1,299 @@
+﻿@using Web.Models.WebModels
+
+@{
+    Layout = null;
+    var ticket = ViewBag.Ticket as UsersSubsystem;
+    if (ticket == null) { ticket=new UsersSubsystem();}
+    var tvm= ViewBag.TVM as UsersSubsystem;
+    if (tvm == null) { tvm = new UsersSubsystem(); }
+    var m4= ViewBag.M4_ExitChannel as UsersSubsystem;
+    if (m4 == null) { m4=new UsersSubsystem();}
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/SubSystemConfig.css" rel="stylesheet" />
+    <title>子系统配置</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">
+                    <img src="~/Images/current.png" />当前位置 :
+                </span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">系统配置</li>
+                        <li class="active">子系统配置</li>
+                    </ol>
+                </div>
+            <div style="clear: both"></div>
+        </div>
+        
+    
+            <div class="container-header">
+                <div class="left-edit">
+                    <div class="left-edit-title"><span>安全检票服务</span></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="admintable">
+                <table>
+                    <tr>
+                        <td><span>*</span> 安全检票服务</td>
+                        <td><input type="text" id="txtTicket" class="form-control" value="@ticket.API_Url"></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>起始时间</td>
+                        <td>
+                            <div class="input-group date form_date divleft" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" id="txtTicketStart" value="@ticket.StartDate" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                            <div class="divto">至</div>
+                            <div class="input-group date form_date divright" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" value="@ticket.EndDate" id="txtTicketEnd" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>备注</td>
+                        <td><input type="text" id="txtTicketMsg" class="form-control" value="@ticket.Remarks"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" id="txtTicketEnabled" value="0" @Html.Raw(Convert.ToInt32(ticket.Enabled) == 1 ? "checked='checked'" : ""))>是否启用</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <!--<div class="table-buton-left">
+                                <a class="btn btn-default btn-block" href="">返回</a>
+                            </div>-->
+                            <div class="table-buton-right">
+                                <button class="btn btn-primary btn-block" onclick="SaveSystem(0)">保存</button>
+                            </div>
+                            <div style="clear: both"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+
+
+            <div class="container-header">
+                <div class="left-edit">
+                    <div class="left-edit-title"><span>TVM服务</span></div>
+                </div>
+                <div style="clear: both"></div>
+
+            </div>
+            <div class="admintable">
+                <table>
+                    <tr>
+                        <td><span>*</span> TVM服务</td>
+                        <td><input type="text" id="txtTvm" class="form-control" value="@tvm.API_Url"></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>起始时间</td>
+                        <td>
+                            <div class="input-group date form_date divleft" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" value="@tvm.StartDate" id="txtTvmStart" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                            <div class="divto">至</div>
+                            <div class="input-group date form_date divright" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" value="@tvm.EndDate" id="txtTvmEnd" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>备注</td>
+                        <td><input type="text" id="txtTvmMsg" class="form-control" value="@tvm.Remarks"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" id="txtTvmEnabled" value="0"  @Html.Raw(Convert.ToInt32(tvm.Enabled) == 1 ? "checked='checked'" : "")>是否启用</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <!--<div class="table-buton-left">
+                                <a class="btn btn-default btn-block" href="">返回</a>
+                            </div>-->
+                            <div class="table-buton-right">
+                                <button class="btn btn-primary btn-block" onclick="SaveSystem(2)">保存</button>
+                            </div>
+                            <div style="clear: both"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="container-header">
+                <div class="left-edit">
+                    <div class="left-edit-title"><span>M4闸机服务</span></div>
+                </div>
+                <div style="clear: both"></div>
+
+            </div>
+            <div class="admintable">
+                <table>
+                    <tr>
+                        <td><span>*</span>M4闸机服务</td>
+                        <td><input type="text" id="txtM4" class="form-control" value="@m4.API_Url"></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>起始时间</td>
+                        <td>
+                            <div class="input-group date form_date divleft" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" value="@m4.StartDate" id="txtM4Start" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                            <div class="divto">至</div>
+                            <div class="input-group date form_date divright" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" size="16" type="text" value="@m4.EndDate" id="txtM4End" readonly>
+                                <div class="input-group-addon"><div class="glyphicon glyphicon-time"></div></div>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>备注</td>
+                        <td><input type="text" id="txtM4Msg" class="form-control" value="@m4.Remarks"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" id="txtM4Enabled" value="0" @Html.Raw(Convert.ToInt32(m4.Enabled) == 1 ? "checked='checked'" : "")>是否启用</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <!--<div class="table-buton-left">
+                                <a class="btn btn-default btn-block" href="">返回</a>
+                            </div>-->
+                            <div class="table-buton-right">
+                                <button class="btn btn-primary btn-block" onclick="SaveSystem(3)">保存</button>
+                            </div>
+                            <div style="clear: both"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+       
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.js"></script>
+    <script src="~/JS/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/JS/datecommon.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/layer/layer.js"></script>
+<script>
+    ///保存数据
+    function SaveSystem(type) {
+        var system;
+        if (type === 0) {
+            if($("#txtTicket").val()==="")
+            {
+                layer.msg("url地址不为空");
+                return;
+            }
+            if (!IsURL($("#txtTicket").val())) {
+                layer.msg("请填写正确的url地址");
+                return;
+            }
+            if ($("#txtTicketStart").val() === "" || $("#txtTicketEnd").val() === "") {
+                layer.msg("时间不能空");
+                return;
+            }
+            system = {
+                API_Url: $("#txtTicket").val(),
+                Remarks: $("#txtTicketMsg").val(),
+                StartDate: $("#txtTicketStart").val(),
+                EndDate: $("#txtTicketEnd").val(),
+                Enabled: $("#txtTicketEnabled").is(":checked") ? 1 : 0
+        }
+        }
+        else if (type === 2) {
+            if ($("#txtTvm").val() === "") {
+                layer.msg("url地址不为空");
+                return;
+            }
+            if (!IsURL($("#txtTvm").val())) {
+                layer.msg("请填写正确的url地址");
+                return;
+            }
+            if ($("#txtTvmStart").val() === "" || $("#txtTvmEnd").val() === "") {
+                layer.msg("时间不能空");
+                return;
+            }
+            system = {
+                API_Url: $("#txtTvm").val(),
+                Remarks: $("#txtTvmMsg").val(),
+                StartDate: $("#txtTvmStart").val(),
+                EndDate: $("#txtTvmEnd").val(),
+                Enabled: $("#txtTvmEnabled").is(":checked") ? 1 : 0
+            }
+        }
+        else if (type === 3) {
+            if ($("#txtM4").val() === "") {
+                layer.msg("url地址不为空");
+                return;
+            }
+            if (!IsURL($("#txtM4").val())) {
+                layer.msg("请填写正确的url地址");
+                return;
+            }
+            if ($("#txtM4Start").val() === "" || $("#txtM4End").val() === "") {
+                layer.msg("时间不能空");
+                return;
+            }
+            system = {
+                API_Url: $("#txtM4").val(),
+                Remarks: $("#txtM4Msg").val(),
+                StartDate: $("#txtM4Start").val(),
+                EndDate: $("#txtM4End").val(),
+                Enabled: $("#txtM4Enabled").is(":checked")  ? 1 : 0
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Configuration/GetSaveSystemConfig",
+            data: { type: type, system: system },
+            dataType: "text",
+            success: function(data) {
+                layer.msg(data);
+                //document.location.reload();//当前页面
+            }
+    });
+    }
+    function IsURL(str_url) {
+        var strRegex = "^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+";
+        var re = new RegExp(strRegex);
+        if (re.test(str_url)) {
+            return (true);
+        } else {
+            return (false);
+        }
+    }
+</script>
+</body>
+</html>

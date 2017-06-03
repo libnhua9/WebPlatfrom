@@ -1,0 +1,84 @@
+﻿@using Web.EF;
+@{
+    ViewBag.Title = "DVRDetail";
+    List<V_Status_DVRNull> list = ViewBag.list as List<V_Status_DVRNull>;
+}
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <h2>海康DVR</h2>
+<body>
+    @{
+        if (list != null)
+        {
+            foreach (var item in list)
+            {
+                if (item.LastUpdate == null)
+                {
+                    <div>
+                        设备名称：@item.DeviceName<br />
+                        设备ID号：@item.DeviceID<br />
+                        状态：<label id="status">离线</label>
+                    </div>
+                }
+                else
+                {
+                <div>
+                    设备名称：@item.DeviceName<br />
+                    设备ID号：@item.DeviceID<br />
+                    启动日期：@item.StartDate<br />
+                    更新日期：<label id="labLastUpdate">@item.LastUpdate</label><br />
+                    状态：<label id="status">离线</label>
+
+                </div>
+                    }
+                }
+            }
+            else
+            {
+            <div>
+                设备名称：<br />
+                设备序列号：<br />
+                启动日期：<br />
+                更新日期：<br />
+
+            </div>
+            }
+
+        }
+
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/page.js"></script>
+    <script src="~/JS/public.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            LoadData();
+            window.setInterval(LoadData, 3000);
+        });
+
+
+        function LoadData() {
+            //alert(666);
+            $.HttpPost("/Monitoring/GetDVRDetail", {id:@list[0].DeviceID}, function (data) {
+                if (data.State === 1) {
+                    //alert(data.Data[0].LastUpdate);
+                    if(comptime(convertTime(data.Data[0].LastUpdate,"yyyy-MM-dd hh:mm:ss"))){
+                        $("#status").html("在线");
+                    }else{
+                        $("#status").html("离线");
+                    }
+                    $("#labLastUpdate").html(convertTime(data.Data[0].LastUpdate,"yyyy-MM-dd hh:mm:ss"));
+                    //alert("成功");
+                } else {
+                    alert("实时刷新失败！")
+                }
+
+            });
+        }
+
+    </script>
+
+</body>

@@ -1,0 +1,200 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <title></title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <header class="container-fluid">
+            <div class="header-left">
+                <span class="header-icon">
+                    <img src="~/Images/logo.png" />
+                </span>
+                <span class="header-title">智联开发平台</span>
+            </div>
+            <div style="clear:both"></div>
+        </header>
+    </div>
+    <div>
+
+        <div class="container-main">
+            <div class="container">
+                <div class="divLogin">
+                    <div class="form-signin">
+                        <h3 class="form-signin-heading userlogin">
+                            请登录
+                        </h3>
+                        <div class="divalert">
+                            <div class="alert">
+                                <img src="~/Images/alert.png" />
+                                <strong>
+                                    
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="inputuser form-group inputgpuser has-feedback">
+                            <span class="spanuser form-control-feedback" aria-hidden="true">
+                                <img src="~/Images/username.png" />
+                            </span>
+                            <input type="text" id="username" class="form-control inputuser" value="@(ViewBag.UserName.ToString())" placeholder="请输入用户名">
+                        </div>
+                        <div class="inputpwd form-group has-feedback">
+                            <span class="spanpwd form-control-feedback" aria-hidden="true">
+                                <img src="~/Images/pwd.png" />
+                            </span>
+                            <input type="password" id="userpwd" class="form-control inputpwd" value="@(ViewBag.PassWord.ToString())" placeholder="请输入密码">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input id="rememberMe" type="checkbox" value="remember-me">
+                                <label id="rulelabel" for="rememberMe"></label>
+                                <span class="spanrem">记住我</span>
+                            </label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" id="btnLogin" type="button">
+                            登录
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <nav class="pull-left copyright">
+                <span class="copyright-year">© 2017</span> <a href="" target="_blank">关于我们</a> | <a href="" target="_blank">联系我们</a> | <a href="" target="_blank">友情链接</a> | <a href="" target="_blank">发展前景</a>
+            </nav>
+        </div>
+    </div>
+    <script src="~/JS/jquery-1.7.2.min.js"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    @*<script src="~/JS/layer/layer.js"></script>*@
+    <script src="~/JS/jQuery.plus.js?sdf"></script>
+    <script type="text/javascript">
+        $(function() {
+            if (location.pathname != '/Home/UpdateIE' && (isIE() == 7 || isIE() == 6 || isIE() == 8)) {
+                window.top.location.href = "/Home/UpdateIE";
+            } else {
+                $("body").css("display", "block");
+            }
+        });
+
+        function isIE() {
+            var myNav = navigator.userAgent.toLowerCase(); return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+        }
+        /**添加设置cookie**/
+        //function addCookie(name, value, days, path) {
+        //    debugger;
+        //    var name = escape(name);
+        //    var value = escape(value);
+        //    var expires = new Date();
+        //    expires.setTime(expires.getTime() + days * 3600000 * 24);
+        //    path = path == "" ? "" : ";path=" + path;
+        //    var _expires = (typeof days) == "string" ? "" : ";expires=" + expires.toUTCString();
+        //    document.cookie = name + "=" + value + _expires + path;
+        //}
+        //function getCookieValue(name) {
+        //    debugger;
+        //    var name = escape(name); 
+        //    var allcookies = document.cookie;
+        //    name += "=";
+        //    var pos = allcookies.indexOf(name);  
+        //    if (pos != -1) {                                              
+        //        var start = pos + name.length;                  
+        //        var end = allcookies.indexOf(";", start);       
+        //        if (end == -1) end = allcookies.length;          
+        //        var value = allcookies.substring(start, end);  
+        //        return (value);                                 
+        //    } else {  
+        //        return "";
+        //    }
+        //}
+
+        //window.onload = function () {
+        //    debugger;
+        //    var userNameValue = getCookieValue("userName");
+        //    document.getElementById("username").value = userNameValue;
+        //    var userPassValue = getCookieValue("userPass");
+        //    document.getElementById("userpwd").value = userPassValue;
+        //}
+       
+        function login() {
+            var userName = $("#username").val();
+            if (userName == '') {
+                $(".divLogin .alert").css("display", "block");
+                var strname = "请输入用户名";
+                showModal(strname);
+                return;
+            }
+            var userPass = $("#userpwd").val();
+            if (userPass == '') {
+                $(".divLogin .alert").css("display", "block");
+                var strname = "请输入密码";
+                showModal(strname);
+                return;
+            }
+            var param = {
+                UserName: $("#username").val(),
+                Psw: $("#userpwd").val()
+            };
+            var isBer = $('#rememberMe').is(':checked') ? 1 : 0;
+            $.HttpPost('/home/login',{ param,IsBer:isBer}, function (data) {
+                if (data && data.State === 1) {
+                    //if ($('#rememberMe').is(':checked')) {
+                        //debugger;
+                        ////添加cookie  
+                        //addCookie("userName", userName, 7, "/");
+                        //addCookie("userPass", userPass, 7, "/");
+                    //}
+                    window.location.href = data.Data;
+                } else {
+                    $(".divLogin .alert").css("display", "block");
+                    var strname = "用户名或密码错误";
+                    showModal(strname);
+                }
+            })};
+        //}
+        //3秒后自动关闭
+        var clearFlag = 0;
+        var count = 3;
+        var showModal = function (strname) {
+            $(".divLogin .alert strong").html(strname);
+            clearFlag = self.setInterval("autoClose()", 1000);
+        }
+        var autoClose = function () {
+            if (count > 0) {
+              
+                count--;
+            } else if (count <= 0) {
+                window.clearInterval(clearFlag);
+                $(".divLogin .alert").css("display", "none");
+                $(".divLogin .alert strong").fadeOut("slow");
+                count = 3;
+                $(".divLogin .alert strong").toggle();
+            }
+        }
+
+        $(function () {
+            $("#username").focus().keypress(function (e) {
+                if (e.keyCode === 13) {
+                    $("#userpwd").focus();
+                }
+            });
+            $("#btnLogin").click(function () {
+                login();
+            });
+            $("#userpwd").keypress(function (e) {
+                if (e.keyCode === 13) {
+                    login();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

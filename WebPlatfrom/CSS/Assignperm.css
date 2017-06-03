@@ -1,0 +1,220 @@
+﻿        /*
+                     * 新增删除修改栏
+                     */
+        #container-body .left-edit {
+            float: left;
+            padding: 7px 0 0 10px;
+        }
+
+            #container-body .left-edit .left-edit-title {
+                border-left: #17AEE3 solid 3px;
+                padding-left: 10px;
+            }
+
+        #container-body .right-edit {
+            float: right;
+        }
+
+            #container-body .right-edit > .btn {
+                border-radius: 15px;
+                font-size: 12px;
+                outline:none;
+            }
+
+            #container-body .right-edit #btnSpread-API {
+                display: none;
+            }
+
+            #container-body .right-edit #btnRetract-TVM,
+            #container-body .right-edit #btnRetract-M4Channel,
+            #container-body .right-edit #btnRetract-Ticket,
+            #container-body .right-edit #btnRetract-ParkStroe,
+            #container-body .right-edit #btnRetract-SelfCabine,
+            #container-body .right-edit #btnRetract-DVR,
+            #container-body .right-edit #btnRetract-LED,
+            #container-body .right-edit #btnRetract-ESensor,
+            #container-body .right-edit #btnRetract-event {
+                display: none;
+            }
+        /*表格*/
+        #container-body > .admintable-API {
+            margin-top: 25px;
+            height: 150px;
+        }
+
+            #container-body > .admintable-API > table {
+                width: 350px;
+                margin: 1px auto;
+            }
+
+                #container-body > .admintable-API > table tr > td:first-child {
+                    padding: 10px 0px 10px 10px;
+                }
+
+                #container-body > .admintable-API > table tr > td:last-child {
+                    padding: 10px 10px 10px 0px;
+                }
+
+                #container-body > .admintable-API > table td > span {
+                    color: #f00;
+                    padding-right: 2px;
+                }
+
+            #container-body > .admintable-API > .container-footer-right {
+                float: right;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+
+            #container-body > .admintable-API .container-buton-left {
+                float: left;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+            #container-body > .admintable-API .container-buton-right {
+                float: right;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+
+        /*2*/
+        #container-body > .admintable-event {
+            padding-bottom: 15px;
+            display: none;
+            height: 190px;
+        }
+
+            #container-body > .admintable-event > table {
+                width: 100%;
+            }
+
+        #container-body .admintable-event table tr > td {
+            padding-top: 15px;
+            padding-right: 20px;
+        }
+
+            #container-body .admintable-event table tr > td:nth-of-type(odd) {
+                padding-right: 0px;
+                padding-left: 15px;
+            }
+
+        #container-body > .admintable-event > table td > span {
+            padding-right: 2px;
+        }
+
+        #container-body > .admintable-event > .container-footer-right {
+            float: right;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        #container-body > .admintable-event .container-buton-left {
+            float: left;
+            width: 100px;
+            margin-right: 50px;
+        }
+
+        #container-body > .admintable-event .container-buton-right {
+            float: right;
+            width: 100px;
+            margin-right: 50px;
+        }
+        /*tvm*/
+        #container-body > .admintable-TVM {
+            display: none;
+        }
+
+        /*M4出口闸机M4Channel*/
+        #container-body > .admintable-M4Channel {
+            display: none;
+        }
+        /*安全检票闸机Ticket*/
+        #container-body > .admintable-Ticket {
+            display: none;
+        }
+        /*水公园储物柜ParkStroe*/
+        #container-body > .admintable-ParkStroe {
+            display: none;
+        }
+        /*自助储物柜SelfCabine*/
+        #container-body > .admintable-SelfCabine {
+            display: none;
+        }
+        /*海康DVR*/
+        #container-body > .admintable-DVR {
+            display: none;
+        }
+        /*LED显示屏*/
+        #container-body > .admintable-LED {
+            display: none;
+        }
+        /*客流计ESensor*/
+        #container-body > .admintable-ESensor {
+            display: none;
+        }
+        #container-body >.admintable-ESensor-divfen {
+           height:50px;
+        }
+        /*表格*/
+        .table-striped > tbody > tr > td {
+            border: 0;
+        }
+
+        .table-striped > tbody > tr {
+            border: 0;
+            height: 40px;
+        }
+
+        .table-striped > thead > tr {
+            background-color: #E8EDF0;
+            height: 38px;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #FFF;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: #E9F6FC;
+        }
+
+
+
+        #container-body .dataTables_info {
+            margin-left: 7px;
+        }
+
+        #container-body .dataTables_paginate {
+            margin: 20px 14px 0 0;
+        }
+        /*
+        * 分页
+         */
+        #container-body .pagination li > a {
+            outline: none;
+            border-radius: 5px;
+            border: 0px;
+        }
+
+        #container-body .pagination {
+            list-style: none;
+            float: right;
+        }
+
+            #container-body .pagination li {
+                float: left;
+                padding-left: 3px;
+            }
+
+                #container-body .pagination li:first-child > a,
+                #container-body .pagination li:last-child > a {
+                    border: 1px solid #ddd;
+                }
+
+            #container-body .pagination .active > a {
+                cursor: pointer;
+                background-color: #16B6F2;
+                border-color: #16B6F2;
+            }

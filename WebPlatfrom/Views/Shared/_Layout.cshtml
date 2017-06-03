@@ -1,0 +1,30 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户登录</title>
+    @*添加下面js from提交不会弹出新页面*@
+
+    @Scripts.Render("~/Scripts/jquery-3.1.0.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+</head>
+<body>
+    <div class="myheader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1">
+                </div>
+                <div class="col-sm-11">
+                    <span class="header">管理系统</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="footer">
+        <nav class="pull-left copyright">
+            <span class="copyright-year">© @DateTime.Now.Year</span> <a href="" target="_blank">关于我们</a> | <a href="" target="_blank">联系我们</a>  |  <a href="" target="_blank">友情链接</a> | <a href="" target="_blank">发展前景</a>
+        </nav>
+    </div>
+</body>
+</html>

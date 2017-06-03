@@ -1,0 +1,95 @@
+﻿@using Web.EF
+
+@{
+    Layout = null;
+    var user = ViewBag.User as Tb_Users;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/AdminDev.css" rel="stylesheet" />
+    <title>UserProfile</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left"><img src="~/Images/current.png" />当前位置:</span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">账号管理</li>
+                        <li class="active">个人资料</li>
+                    </ol>
+                </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable">
+            <table>
+                <tr>
+                    <td><span>*</span> 用户名</td>
+                    <td><input type="text" id="UserName" class="form-control" readonly="readonly" value="@Html.Raw(user?.UserName)"></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>原始密码</td>
+                    <td><input type="password" id="txtOldPwd" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>新密码</td>
+                    <td><input type="password" id="txtNewPwd1" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>确认密码</td>
+                    <td><input type="password" id="txtNewPwd2" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="table-buton-left">
+                            <a class="btn btn-default btn-block" href="/AccManage/GoBackUserProfile">返回</a>
+                        </div>
+                        <div class="table-buton-right">
+                            <button class="btn btn-primary btn-block" onclick="SaveUserProfile()">保存</button>
+                        </div>
+                        <div style="clear: both"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/jQuery.plus.js"></script>
+    <script type="text/javascript">
+        //保存个人资料
+        function SaveUserProfile() {
+            var oldpwd = $("#txtOldPwd").val();//取得所有密码
+            var pwd = $("#txtNewPwd1").val();
+            var pwd2 = $("#txtNewPwd2").val();
+            if (pwd && pwd2 && pwd === pwd2) {
+                var info2 = {
+                    OldPsw: oldpwd,
+                    NewPsw: pwd2
+                };
+                $.HttpPost("/AccManage/SaveUserProfile", { info: info2 }, function (data) {
+                    if (data.State === 1) {
+                        //alert("保存成功");
+                        layer.msg("保存成功", { icon: 1 });
+                    } else {
+                        //alert("保存失败。\r\n" + data.Message);
+                        layer.msg("保存失败\r\n" + data.Message, { icon: 2 });
+                    }
+                })
+            } else {
+                //alert("两次输入的密码不一致");
+                layer.msg("两次输入的密码不一致", { icon: 2 });
+            }
+            
+        }
+    </script>
+</body>
+</html>

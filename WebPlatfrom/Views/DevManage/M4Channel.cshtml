@@ -1,0 +1,286 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <title>M4出口闸机</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/CSS/manager.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/manacommon.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">
+                    <img src="~/Images/current.png" />当前位置 :
+                </span>
+             </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">设备管理</li>
+                        <li class="active">通道设备</li>
+                        <li class="active">M4出口闸机</li>
+                    </ol>
+                </div>
+
+            <div class="divchoose">
+                <input type="text" id="inputshu" class="form-control inputsearch" placeholder="设备名称">
+                <a id="btncheck" class="btn btn-info " onclick="GetList();">查询</a>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="divdate">
+                <span class="spandate">起止时间 :</span>
+                <div class="input-group date form_date divleft" initialdate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" id="txtStart" size="16" type="text" value="" readonly>
+                    <div class="input-group-addon">
+                        <div class="glyphicon glyphicon-time"></div>
+                    </div>
+                </div>
+                <input type="hidden" id="dtp_input3" value="" />
+                <span class="divto">—</span>
+                <div class="input-group date form_date divright" initialdate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" id="txtEnd" size="16" type="text" value="" readonly>
+                    <div class="input-group-addon">
+                        <div class="glyphicon glyphicon-time"></div>
+                    </div>
+                </div>
+                <input type="hidden" id="dtp_input3" value="" />
+            </div>
+               
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-header">
+            <div class="right-edit">
+
+                <a id="btnBuild" class="btn btn-info " href="/DevManage/AddM4Channel">
+                    添加
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+                <a id="btnEdit" class="btn btn-success" onclick="onEdit();">
+                    修改
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </a>
+                <a id="btnDel" class="btn btn-danger" onclick="onDelete();">
+                    删除
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </a>
+                <a id="Button1" class="btn btn-warning" onclick="AddMark()">
+                    标注
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-table">
+        </div>
+    </div>
+
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/layer/layer.js"></script>
+    <script src="~/JS/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.js"></script>
+    <script src="~/JS/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/JS/datecommon.js"></script>
+    <script src="~/JS/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/JS/dataTables.bootstrap.js"></script>
+    <script src="~/JS/trchecked.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/public.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script type="text/javascript">
+        //下拉框选择
+        $(function () {
+            $(".dropdown-menu-right li").click(function () {
+                var $item = $(this).children("a");
+                $("#input-li").val($item.html()).attr("roleId", $item.attr("roleId"));
+            });
+            GetList();
+            $('#tblM4ChannelList').on("click", ".checkall", function () {
+                var check = $(this).prop("checked");
+                $(".checkchild").prop("checked", check);
+            });
+
+        });
+        //LED加载数据
+        function GetList() {
+            $(".container-table").html(' <table class="table table-striped tabtr" id="tblM4ChannelList"></table>');
+            $("#tblM4ChannelList").dataTable({
+                "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
+                "bServerSide": true, //是否启动服务器端数据导入
+                "bLengthChange": false,//去掉每页多少条框体
+                "bJQueryUI": true, //是否使用 jQury的UI theme
+                "bAutoWidth": false, //是否自适应宽度
+                "bScrollCollapse": true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
+                "bFilter": false, //是否启动过滤、搜索功能
+                "ordering": false,  //去掉页头排序
+                "ajax": {
+                    "url": "/DevManage/GetM4ChannelList",
+                    "type": "POST",
+                    "data": {
+                        DeviceName: $(".inputsearch").val(),starts: $("#txtStart").val(), end: $("#txtEnd").val()
+                    }
+                },
+                "aoColumns": [
+                        {
+                            "mDataProp": "DeviceID", "sTitle": "<input type='checkbox'  class='checkall'/>全选", "sDefaultContent": "", "sClass": "center",
+                            "render": function (data, type, full, meta) {
+                                return '<input type="checkbox"  name="id" class="checkchild"  value="' + data + '" />';
+                            },
+                            "bSortable": false
+                        },
+                         {
+                             "mDataProp": "DeviceSN",
+                             "sTitle": "设备序列号",
+                             "sDefaultContent": "",
+                             "sClass": "center"
+                         },
+                        {
+                            "mDataProp": "DeviceName",
+                            "sTitle": "设备名称",
+                            "sDefaultContent": "",
+                            "sClass": "centername"
+                        },
+                       {
+                           "mDataProp": "StartDate", "sTitle": "开始时间","sDefaultContent": "","sClass": "center", render: function (data) {
+                               return ChangeDateFormatToLocaleDate(data);
+                           }
+                       },
+                        {
+                            "sTitle": "结束时间", "mDataProp": "EndDate", render: function (data) {
+                                return ChangeDateFormatToLocaleDate(data);
+                            }
+                        },
+                        //{ "sTitle": "ip地址", "mDataProp": "IPAddress", "sDefaultContent": "", "sClass": "center" },
+                        //{ "sTitle": "端口", "mDataProp": "Port", "sDefaultContent": "", "sClass": "center" },
+                        {
+                            "sTitle": "设备是否启用", "mDataProp": "Enabled","sDefaultContent": "", "sClass": "center", render: function (data) {
+                                return data == 1 ? "是" : "否";
+                            }
+                        }
+                    //    , {
+                    //"mDataProp": "DeviceID", "sTitle": "操作", "sDefaultContent": "",
+                    //        bSortable: false,
+                    //        visible: true,
+                    //        //width: '200px',
+                    //        render: function (data) {
+                    //            var html = " <a id='btnEdit' class='btn btn-success' href='/DevManage/EditM4Channel/" + data + "'>  修改<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> </a>" +
+                    //                "<a id='btnDel' class='btn btn-danger' onclick='onDelete(" + data + "); return false;'> 删除<span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </a> " +
+                    //                "<a id='Button1' class='btn btn-warning' href='/DevManage/AddMark' > 标注<span class='glyphicon glyphicon-lock' aria-hidden='true'></span></a>";
+
+                    //            return html;
+                    //        }
+                    //    }
+                ], "language": {
+                    "processing": "加载中...",
+                    "lengthMenu": "每页显示 _MENU_ 条数据",
+                    "zeroRecords": "没有匹配结果",
+                    "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "emptyTable": "没有匹配结果",
+                    "loadingRecords": "载入中...",
+                    "thousands": ",",
+                    "paginate": {
+                        "first": "首页",
+                        "previous": "上一页",
+                        "next": "下一页",
+                        "last": "末页"
+                    }, rowCallback: function (row, data, index) {
+                        var ck = $('#tblM4ChannelList').find('input[class="checkall"]');
+                        var bl = $(ck).is(':checked');
+                        if (bl) {
+                            $(ck).click();
+                        }
+
+                    }
+                }
+            });
+
+        }
+
+        //获取选中行的Id
+        function getRow() {
+            if ($(".checkchild:checked").length !== 1) {
+                //alert("一次只能修改一条数据");
+                layer.alert("一次只能修改一条数据", { icon: 3 });
+                return;
+            }
+            var $obj = $(".checkchild:checked").val();
+            return $obj;
+
+        }
+        //地图标记 lbh  13134646413123246464646
+        function AddMark() {
+            if ($(".checkchild:checked").length !== 1) {
+                //alert("请选择一条数据！");
+                layer.alert("请选择一条数据", { icon: 3 });
+                return;
+            }
+            var $obj = $(".checkchild:checked").val();
+            if ($obj) {
+                var name = $(".checkchild:checked").parent().siblings(".centername").text();
+                var id = $obj;
+                //$.loadPage("/DevManage/AddMark/" + id + "/M4Channel");
+                layer.open({
+                    type: 2,
+                    title: name,
+                    maxmin: true,
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['540px', '600px'],
+                    content: "/DevManage/AddMark/" + id + "/M4Channel"
+                });
+            }
+        };
+        //编辑操作
+        function onEdit() {
+            var $obj = getRow();
+            if ($obj) {
+                var id = $obj;
+                $.loadPage("/DevManage/EditM4Channel/" + id);
+            }
+        };
+
+        //删除操作 1313464
+        function onDelete() {
+            var id_array = new Array();
+            $('input[name="id"]:checked').each(function () {
+                id_array.push($(this).val());//向数组中添加元素
+            });
+            var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串
+            if (idstr.length <= 0) {
+                layer.alert("请选择要删除数据", { icon: 3 }); return;
+            }
+                //var txt = $obj.parent().next().text();
+                //if (!confirm("确定要删除数据吗?")) return;
+                layer.alert('确定要删除数据吗？', {
+                    time: 0 //不自动关闭
+                                 , btn: ['确定', '取消']
+                                 , yes: function (index) {
+                                     $.HttpGet("/DevManage/DeleteM4Channel", { arry: idstr }, function (data) {
+                                         if (data.State === 1) {
+                                             //alert("删除成功。");
+                                             layer.msg("删除成功", { icon: 1 });
+                                             GetList();
+                                         } else {
+                                             //alert("删除失败。\r\n" + data.Message);
+                                             layer.msg("删除失败\r\n" + data.Message, { icon: 2 });
+                                         }
+                                     });
+                                 }
+                });
+                //var id = $obj;
+               
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+﻿
+   #container-body > .container-table thead th:first-child {
+             width:70px;
+             min-width:70px;         
+ }

@@ -1,0 +1,984 @@
+[
+    {
+        "Name": "账号管理",
+        "Icon": "/nav-menu-Icon/zhanghaoguangli.png",
+        "Link": "",
+        "Level": "0,1",
+        "Index": "1",
+        "Items": [
+            {
+                "Name": "管理员",
+                "Icon": "/AccountImg/gly2.png",
+                "Link": "/AccManage/Administrator",
+                "Level": "0,1",
+                "Index": "1",
+                "Toolbar": [
+                    {
+                        "Name": "添加",
+                        "Icon": "",
+                        "Link": "/AccManage/addAdmin",
+                        "Level": "0",
+                        "Index": "2"
+                    },
+                    {
+                        "Name": "修改",
+                        "Icon": "",
+                        "Link": "/AccManage/editAdmin", 
+                        "Level": "0",
+                        "Index": "3"
+                    },
+                    {
+                        "Name": "删除",
+                        "Icon": "",
+                        "Link": "/AccManage/DeleteUser",
+                        "Level": "0",
+                        "Index": "4"
+                    }
+                ]
+            },
+            {
+                "Name": "开发者",
+                "Icon": "/AccountImg/kfz2.png",
+                "Link": "/AccManage/Developer",
+                "Level": "0,1",
+                "Index": "2",
+                "Toolbar": [
+                    {
+                        "Name": "添加",
+                        "Icon": "",
+                        "Link": "/AccManage/AddDeveloper",
+                        "Level": "0,1",
+                        "Index": "1"
+                    },
+                    {
+                        "Name": "修改",
+                        "Icon": "",
+                        "Link": "/AccManage/EditDeveloper",
+                        "Level": "0,1",
+                        "Index": "2"
+                    },
+                    {
+                        "Name": "删除",
+                        "Icon": "",
+                        "Link": "/AccManage/DeleteUser",
+                        "Level": "0,1",
+                        "Index": "3"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "应用权限",
+        "Icon": "/nav-menu-Icon/yiyongquanxian.png",
+        "Link": "",
+        "Level": "0,1,2",
+        "Index": "2",
+        "Items": [
+            {
+                "Name": "我的权限",
+                "Icon": "/ApplicationRightImg/quanxian2.png",
+                "Link": "/ApplicationRight/Assignperm",
+                "Level": "2",
+                "Index": "1",
+                //"Toolbar": [
+                //    {
+                //        "Name": "申请设备",
+                //        "Icon": "",
+                //        "Link": "/ApplicationRight/ApplyDev",
+                //        "Level": "2",
+                //        "Index": "1"
+                //    },
+                //    {
+                //        "Name": "申请接口",
+                //        "Icon": "",
+                //        "Link": "/ApplicationRight/ApplyPermission",
+                //        "Level": "2",
+                //        "Index": "1"
+                //    },
+                //    {
+                //        "Name": "修改",
+                //        "Icon": "",
+                //        "Link": "/ApplicationRight/add",
+                //        "Level": "2",
+                //        "Index": "2"
+                //    }
+                //]
+            },
+            {
+                "Name": "权限管理",
+                "Icon": "/ApplicationRightImg/quanxianguanli2.png",
+                "Link": "/ApplicationRight/AuthorityManage",
+                "Level": "0,1",
+                "Index": "2"
+            }
+        ]
+    },
+    {
+        "Name": "设备管理",
+        "Icon": "/nav-menu-Icon/shebeiguangli.png",
+        "Link": "",
+        "Level": "0,1",
+        "Index": "3",
+        "Items": [
+            {
+                "Name": "通道设备",
+                "Icon": "/DeviceManageImg/tongdao2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                    {
+                        "Name": "安全检票闸机",
+                        "Icon": "",
+                        "Link": "/DevManage/Ticket",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addPark",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editPark",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deletePark",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "M4出口闸机",
+                        "Icon": "",
+                        "Link": "/DevManage/M4Channel",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addLEDScreen",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editLEDScreen",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deleteLEDScreen",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "储物柜",
+                "Icon": "/DeviceManageImg/chuwugui2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                    {
+                        "Name": "水公园储物柜",
+                        "Icon": "",
+                        "Link": "/DevManage/ParkStroe",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addPark",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editPark",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deletePark",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "自助储物柜",
+                        "Icon": "",
+                        "Link": "/DevManage/SelfCabine",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addLEDScreen",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editLEDScreen",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deleteLEDScreen",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "自助机",
+                "Icon": "/DeviceManageImg/zhidong2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                    {
+                        "Name": "TVM",
+                        "Icon": "",
+                        "Link": "/DevManage/TVM",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addPark",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editPark",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deletePark",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "第三方",
+                "Icon": "/DeviceManageImg/disanfang2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                    {
+                        "Name": "海康DVR",
+                        "Icon": "",
+                        "Link": "/DevManage/DVR",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addPark",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editPark",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deletePark",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    },
+                  {
+                    "Name": "LED显示屏",
+                    "Icon": "",
+                    "Link": "/DevManage/LED",
+                    "Level": "0,1",
+                    "Index": "2",
+                    "Toolbar": [
+                      {
+                        "Name": "添加",
+                        "Icon": "",
+                        "Link": "/DevManage/addLED",
+                        "Level": "0,1",
+                        "Index": "1"
+                      },
+                      {
+                        "Name": "修改",
+                        "Icon": "",
+                        "Link": "/DevManage/editLED",
+                        "Level": "0,1",
+                        "Index": "2"
+                      },
+                      {
+                        "Name": "删除",
+                        "Icon": "",
+                        "Link": "/DevManage/deleteLED",
+                        "Level": "0,1",
+                        "Index": "3"
+                      }
+                    ]
+                  },
+                  {
+                        "Name": "客流计",
+                        "Icon": "",
+                        "Link": "/DevManage/ESensor",
+                        "Level": "0,1",
+                        "Index": "2",
+                        "Toolbar": [
+                            {
+                                "Name": "添加",
+                                "Icon": "",
+                                "Link": "/DevManage/addScreen",
+                                "Level": "0,1",
+                                "Index": "1"
+                            },
+                            {
+                                "Name": "修改",
+                                "Icon": "",
+                                "Link": "/DevManage/editScreen",
+                                "Level": "0,1",
+                                "Index": "2"
+                            },
+                            {
+                                "Name": "删除",
+                                "Icon": "",
+                                "Link": "/DevManage/deleteScreen",
+                                "Level": "0,1",
+                                "Index": "3"
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+        ]
+    },
+    {
+        "Name": "实时监控",
+        "Icon": "/nav-menu-Icon/shishijiankong.png",
+        "Link": "",
+        "Level": "0,1,2",
+        "Index": "4",
+        "Items": [
+            {
+                "Name": "设备状态",
+                "Icon": "/Monitoring/shebeizhuangtai2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                  {
+                    "Name": "通道设备",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "安全检票闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/EquipStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "M4出口闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/M4ChannelStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "储物柜",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "水公园储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/ParkStoreStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "自助储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/SelfCabinet",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "自助机",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "TVM",
+                          "Icon": "",
+                          "Link": "/Monitoring/TVMStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "第三方",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "海康DVR",
+                          "Icon": "",
+                          "Link": "/Monitoring/DVRStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                      {
+                        "Name": "LED显示屏",
+                        "Icon": "",
+                        "Link": "/Monitoring/LEDStatus",
+                        "Level": "0,1,2",
+                        "Index": "2"
+                      },
+                        {
+                          "Name": "客流计",
+                          "Icon": "",
+                          "Link": "/Monitoring/eSensorStatus",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  }
+                ]
+            },
+            {
+                "Name": "设备交互",
+                "Icon": "/Monitoring/shebeijiaohu2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                 "Items": [
+                  {
+                    "Name": "通道设备",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "安全检票闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/EquipInteraction",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "M4出口闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/M4ChannelLogs",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "储物柜",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "水公园储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/ParkStoreLogs",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "自助储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/SelfCabinetLogs",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "自助机",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1",
+                    "Index": "2",
+                    "Items": [
+                      {
+                        "Name": "TVM",
+                        "Icon": "",
+                        "Link": "/Monitoring/TVMLogs",
+                        "Level": "0,1,2",
+                        "Index": "2"
+                      }
+                    ]
+                  }
+                  //,
+                  //{
+                  //  "Name": "第三方",
+                  //  "Icon": "",
+                  //  "Link": "",
+                  //  "Level": "0,1",
+                  //  "Index": "2",
+                  //  "Items": [
+                  //    {
+                  //      "Name": "LED显示屏",
+                  //      "Icon": "",
+                  //      "Link": "/Monitoring/LEDLogs",
+                  //      "Level": "0,1",
+                  //      "Index": "2"
+                  //    },
+                  //      {
+                  //        "Name": "客流计",
+                  //        "Icon": "",
+                  //        "Link": "/Monitoring/eSensorLogs",
+                  //        "Level": "0,1",
+                  //        "Index": "2"
+                  //      }
+                  //   ]
+                  //}
+                ]
+            },
+            {
+                "Name": "接口交互",
+                "Icon": "/Monitoring/jiekoujiaohu2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                  {
+                    "Name": "人脸检测",
+                    "Icon": "",
+                    "Link": "/Monitoring/Interaction",
+                    "Level": "0,1,2",
+                    "Index": "2"
+                  },
+                  {
+                    "Name": "道控支付接口",
+                    "Icon": "",
+                    "Link": "/Monitoring/InteractionPay",
+                    "Level": "0,1,2",
+                    "Index": "2"
+                  }
+                ]
+            },
+            {
+                "Name": "地图",
+                "Icon": "/Monitoring/ditu2.png",
+                "Link": "",
+                "Level": "0,1,2",
+              "Index": "2",
+               "Items": [
+                  {
+                    "Name": "通道设备",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "安全检票闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapTicket",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "M4出口闸机",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMap",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "储物柜",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "水公园储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapParkSrore",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "自助储物柜",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapSelfCabinet",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "自助机",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "TVM",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapTVM",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "第三方",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "海康DVR",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapDVR",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                      {
+                        "Name": "LED显示屏",
+                        "Icon": "",
+                        "Link": "/Monitoring/ShowMapLED",
+                        "Level": "0,1,2",
+                        "Index": "2"
+                      },
+                        {
+                          "Name": "客流计",
+                          "Icon": "",
+                          "Link": "/Monitoring/ShowMapeSensor",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "分析和报表",
+        "Icon": "/nav-menu-Icon/fenxihebaobiao.png",
+        "Link": "Test1.html",
+        "Level": "0,1,2",
+        "Index": "5",
+        "Items": [
+            {
+                "Name": "接口",
+                "Icon": "/Report/jiekou2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+                "Items": [
+                    {
+                        "Name": "性能",
+                        "Icon": "/nav-menu-Icon/fenxihebaobiao.png",
+                        "Link": "",
+                        "Level": "0,1,2",
+                        "Index": "2",
+                        "Items": [
+                        {
+                          "Name": "人脸识别",
+                          "Icon": "",
+                          "Link": "/Report/PerformanceFace",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "道控支付接口",
+                          "Icon": "",
+                          "Link": "/Report/PerformancePay",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                    },
+                    //{
+                    //    "Name": "统计",
+                    //    "Icon": "/nav-menu-Icon/fenxihebaobiao.png",
+                    //    "Link": "",
+                    //    "Level": "0,1,2",
+                    //    "Index": "2"
+                    //},
+                    {
+                        "Name": "明细",
+                        "Icon": "/nav-menu-Icon/fenxihebaobiao.png",
+                        "Link": "",
+                        "Level": "0,1,2",
+                        "Index": "2",
+                         "Items": [
+                        {
+                          "Name": "人脸识别",
+                          "Icon": "",
+                          "Link": "/Report/DetailFace",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "道控支付接口",
+                          "Icon": "",
+                          "Link": "/Report/DetailPay",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                    }
+                ]
+            },
+            {
+                "Name": "设备",
+                "Icon": "/Report/shebei2.png",
+                "Link": "",
+                "Level": "0,1,2",
+                "Index": "2",
+              "Items": [
+                {
+                    "Name": "通道设备",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "安全检票闸机",
+                          "Icon": "",
+                          "Link": "/Report/TicketReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "M4出口闸机",
+                          "Icon": "",
+                          "Link": "/Report/M4ChannelReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "储物柜",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "水公园储物柜",
+                          "Icon": "",
+                          "Link": "/Report/ParkStroeReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                        {
+                          "Name": "自助储物柜",
+                          "Icon": "",
+                          "Link": "/Report/SelfCabineReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "自助机",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                     "Items": [
+                        {
+                          "Name": "TVM",
+                          "Icon": "",
+                          "Link": "/Report/TVMReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  },
+                  {
+                    "Name": "第三方",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "海康DVR",
+                          "Icon": "",
+                          "Link": "/Report/DVRReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                      {
+                        "Name": "LED显示屏",
+                        "Icon": "",
+                        "Link": "/Report/LEDReport",
+                        "Level": "0,1,2",
+                        "Index": "2"
+                      },
+                        {
+                          "Name": "客流计",
+                          "Icon": "",
+                          "Link": "/Report/ESensorReport",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        }
+                     ]
+                  }
+                //{
+                //  "Name": "安全检票闸机",
+                //  "Icon": "",
+                //  "Link": "/Report/TicketReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "M4出口闸机",
+                //  "Icon": "",
+                //  "Link": "/Report/M4ChannelReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "水公园储物柜",
+                //  "Icon": "",
+                //  "Link": "/Report/ParkStroeReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "自助储物柜",
+                //  "Icon": "",
+                //  "Link": "/Report/SelfCabineReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "TVM",
+                //  "Icon": "",
+                //  "Link": "/Report/TVMReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "海康DVR",
+                //  "Icon": "",
+                //  "Link": "/Report/DVRReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "LED显示屏",
+                //  "Icon": "",
+                //  "Link": "/Report/LEDReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //},
+                //{
+                //  "Name": "客流计",
+                //  "Icon": "",
+                //  "Link": "/Report/ESensorReport",
+                //  "Level": "0,1,2",
+                //  "Index": "2"
+                //}
+              ]
+            }
+        ]
+    },
+    {
+        "Name": "系统配置",
+        "Icon": "/nav-menu-Icon/xitongpeizhi.png",
+        "Link": "/Configuration/ConfigParameter",
+        "Level": "0,1,2",
+        "Index": "6",
+        "Items": [
+          {
+            "Name": "配置参数",
+            "Icon": "/ConfigurationImg/canshu2.png",
+            "Link": "/Configuration/ConfigParameter",
+            "Level": "0,1,2",
+            "Index": "2"
+          }
+          ,
+            {
+                "Name": "子系统配置",
+                "Icon": "/ConfigurationImg/shouquan2.png",
+                "Link": "/Configuration/SubSystemConfig",
+                "Level": "0,1,2",
+                "Index": "2"
+            }
+        ]
+    }
+]

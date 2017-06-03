@@ -1,0 +1,159 @@
+﻿      body {
+        display:none;
+        }
+        .header {
+            background-color: #FFF;
+            margin: 0 auto;
+            min-width: 1100px;
+        }
+
+            .header .container-fluid {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+
+        .header-left {
+            margin-left: 111px;
+            float: left;
+        }
+
+            .header-left .header-icon {
+                float: left;
+                margin-right: 15px;
+            }
+
+            .header-left .header-title {
+                float: left;
+                display: block;
+                padding-top: 15px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+
+        .container-main {
+            background-image: url('../../Images/backlogo.png');
+            background-size: 100% 100%;
+            padding: 80px 20px;
+            min-width: 1100px;
+        }
+
+        .divLogin {
+            width: 332px;
+            float: right;
+            height: 322px;
+            background-color: #ffffff;
+            padding: 0 25px 25px 25px;
+            border-radius:3px;
+        }
+            .divLogin .divalert {
+             height:27px;
+             margin-bottom:3px;
+            }
+            .divLogin .alert {
+                padding:3px;
+                width:276px;
+                height:25px;
+                margin-bottom:10px;
+                display:none;
+                background-color:#ffeceb;
+                border:1px solid #f05653;
+                color:#ec726f;
+                font-size:10px;
+            }
+            .divLogin .divalert > .alert >img {
+                padding:0 10px 3px 10px;
+            }
+            .divLogin .form-signin {
+            padding-left:3px;
+            }
+        .divLogin .btn:focus,
+        .divLogin .btn-primary {
+            background-color:#16B2EB;
+            border-color:#16B2EB;
+        }
+        .divLogin #userpwd,
+        .divLogin #username {
+           top:0px;
+           padding-left:55px;
+        }
+         .divLogin .inputpwd input,
+        .divLogin .inputuser input {
+           height:40px;
+           width:276px;
+        }
+         .divLogin .form-control-feedback {
+         left:14px;
+        }
+        .form-signin .inputgpuser {
+            margin-bottom: 10px;
+        }
+
+        .divLogin .userlogin {
+            font-family:Noto Sans CJK SC Thin;
+            color:#7a7a7a;
+            margin-bottom:3px;
+        }
+        .divLogin #btnLogin {
+           outline:none;
+        }
+        .divLogin .checkbox {
+          padding-left:10px;
+        }
+         #rulelabel {
+                background-image: url('../Images/unselect.png');
+                background-repeat: no-repeat;
+                background-size: 13px 13px;
+                display: inline-block;
+                height: 13px;
+                width: 13px;
+                position: absolute;
+                top: 0.28rem;
+                left:10px;
+            }
+         #rememberMe:checked + label {
+                    background-image: url('../Images/select.png');
+                }
+           
+            #rememberMe {
+                 width: 0;
+                height: 0;
+                padding: 0;
+                margin: 0;
+                display:none;
+            }
+            
+            .divLogin .checkbox .spanrem {
+              padding-left:10px;
+              color:#8a8a8a;
+            }
+        .footer nav.pull-left {
+            float: none !important;
+        }
+
+        .footer .copyright {
+            color: #777777;
+            padding: 10px 15px;
+            margin: 15px 3px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer nav {
+            display: block;
+        }
+
+        .inputpwd, .inputuser {
+            top: 1px;
+        }
+
+        .copyright a {
+            text-decoration: none;
+            color: #444;
+        }
+
+            .copyright a:hover {
+                text-decoration: none;
+                color: #ff0000;
+            }

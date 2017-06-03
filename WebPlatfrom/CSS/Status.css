@@ -1,0 +1,91 @@
+﻿#container-body > .container-headerss {
+    display:none;
+     border-bottom:1px solid #ddd;
+            padding:10px;
+}  
+   #container-body>.container-headerss>.left-edit {
+            float: left;
+            padding: 7px 0 0 10px;
+        }
+
+            #container-body>.container-headerss>.left-edit .left-edit-title {
+                border-left: #17AEE3 solid 3px;
+                padding-left: 10px;
+            }
+            #container-body > .container-headers {
+                 display:none;
+            border-top:1px solid #ddd;
+            border-bottom:1px solid #ddd;
+            padding:10px;
+            }
+               #container-body >.container-headers .left-edit {
+            float: left;
+            padding: 7px 0 0 10px;
+        }
+
+            #container-body>.container-headers>.left-edit .left-edit-title {
+                border-left: #17AEE3 solid 3px;
+                padding-left: 10px;
+            }
+
+#main {
+            margin: 0px;
+            padding: 0px;
+            height: auto;
+            /*min-width:1170px;*/
+        }
+        #main > .div-left {
+                width:370px;
+                margin:10px 0 10px 20px;
+                float: left;
+                height: 320px;
+                border: 1px solid #DFDFDF;
+        }
+            
+        #main > .div-left > .div-leftl {
+             float:left;
+        }
+         #main > .div-left > .div-leftl img{
+            width:90px;
+            height:90px;
+        }
+        #main > .div-left > .div-leftr {
+             float:right;
+             width:250px;
+             margin-top:20px;
+             margin-right:5px;
+        }
+        #main > .div-left > .div-leftr lab {
+             padding:1px; 
+        }
+
+         #main2 {
+            margin: 0px;
+            padding: 0px;
+            height: auto;
+           /*min-width:1170px;*/
+        }
+        #main2 > .div-left {
+                width:370px;
+                margin:10px 0 10px 20px;
+                float: left;
+                height: 320px;
+                border: 1px solid #DFDFDF;
+        }
+            
+        #main2 > .div-left > .div-leftl {
+             float:left;
+        }
+         #main2 > .div-left > .div-leftl img{
+            width:90px;
+            height:90px;
+        }
+        #main2 > .div-left > .div-leftr {
+             float:right;
+             width:250px;
+             margin-top:20px;
+             margin-right:5px;
+        }
+        #main2 > .div-left > .div-leftr lab {
+             padding:1px; 
+        }

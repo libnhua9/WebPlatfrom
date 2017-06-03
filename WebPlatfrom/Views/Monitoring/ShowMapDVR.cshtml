@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "ShowMapDVR";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图演示</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/MapHeader.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=84937cce118be97b42245c5d358f4aeb&callback=initMap"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/public.js"></script>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">
+                    <img src="~/Images/current.png" />当前位置 :
+                </span>
+                <ol class="breadcrumb">
+                    <li class="active">实时监控</li>
+                    <li class="active">地图</li>
+                    <li class="active">第三方</li>
+                    <li class="active">海康DVR</li>
+                </ol>
+                @*<div>在线：<label id="OnLineCount"></label>离线：<label id="OffLineCount"></label>物理不存在：<label id="NonExistent"></label></div>*@
+            </div>
+            <div class="right">
+                <div class="divonline">在线：<label id="OnLineCount"></label>   离线：<label id="OffLineCount"></label>  @*物理不存在：<label id="NonExistent"></label>*@</div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div id="container"></div>
+
+    <script>
+        var listMarkers = new Array();
+        var xxStyle = '<%=Map_Style%>';
+        var map = null;
+        var infoWindow = null;
+
+        function initMap() {
+            var lat;
+            var lng;
+            if ("@ViewBag.lat" == "") {
+                 lng = "114.056026";
+                 lat = "22.549659";
+            } else {
+                lat = "@ViewBag.lat";
+                lng = "@ViewBag.lng";
+            }
+            map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 15,
+                //114.056026,22.549659
+                center: [lng,lat],
+                expandZoomRange: true,
+                mapStyle: xxStyle,
+                showIndoorMap: true //隐藏地图自带的室内地图图层
+            });
+            infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
+            //setTimeout(initMarkers, 1000);
+            initMarkers();
+        }
+         
+        var initMarkers = function () {
+            $.HttpPost("/Monitoring/GetStatusDVRNullList", {map:1}, function (data) {
+                if (data.State === 1) {
+
+                    var searchResult = data.Data;
+
+                    //var center = new AMap.LngLat(searchResult[0].Lng, searchResult[0].Lat);
+
+                    //map.panTo(center);
+                    //map.setZoom(20);
+                    //map.setLimitBounds(map.getBounds());
+                    var OnLineCount = 0;
+                    var OffLineCount = 0;
+                    var NonExistent = 0;
+                    for (var i = 0; i < searchResult.length; i++) {
+
+
+                        var img = '/Images/Device/海康DVR离线.gif';
+                        if (searchResult[i].LastUpdate != null) {
+
+                            if (comptime(convertTime(searchResult[i].LastUpdate, "yyyy-MM-dd hh:mm:ss"))) {
+                                OnLineCount++;
+                                img = '/Images/Device/海康DVR在线.gif';
+                            } else {
+                                OffLineCount++;
+                                img = '/Images/Device/海康DVR离线.gif';
+                            }
+                        } else {
+                            NonExistent++;
+                        }
+                        if (searchResult[i].Lng != null) {
+                            var marker = new AMap.Marker({
+                                icon: img,
+                                position: [searchResult[i].Lng, searchResult[i].Lat],
+                                title: searchResult[i].DeviceName,
+                                draggable: false
+                            });
+
+                            marker.setMap(map);
+                            marker.content = "<div><iframe frameborder=0 style=\"width:300px;height:200px\" src='" + '/Monitoring/DVRDetail/' + searchResult[i].DeviceID + "'/></div> ";
+                            marker.on('click', markerClick);
+                        }
+                    }
+                    $("#OnLineCount").html(OnLineCount);
+                    $("#OffLineCount").html(OffLineCount + NonExistent);
+                    $("#NonExistent").html(NonExistent);
+                    //创建分页
+
+                } else {
+                    alert("查询失败。\r\n" + data.Message);
+                }
+            });
+
+        }
+        //定时更新标图
+        UpdateMarker = function () {
+            //TODO:利用AJAX读设备的状态
+            $.ajax({
+                url: 'ShowMap.aspx/ReadDeviceStatus',
+                type: "POST",
+                data: "{'nType':'1'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.d != null) {
+                        var obj = eval('(' + data.d + ')');
+                        for (var i = 0; i < obj.length; i++) {
+                            SetMarkerIcon(obj[i].id, obj[i].url);
+                        }
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+
+
+        function markerClick(e) {
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getPosition());
+        }
+
+
+    </script>
+
+</body>
+

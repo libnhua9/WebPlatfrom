@@ -1,0 +1,141 @@
+﻿@using Web.EF
+@{
+    Layout = null;
+    var parkstore = ViewBag.parkstore as Tb_Device_ParkStore;
+    if (parkstore == null) { parkstore=new Tb_Device_ParkStore();}
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/Common.css" rel="stylesheet" />
+    <title>添加水公园储物柜</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">当前位置 :</span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">设备管理</li>
+                        <li class="active">储物柜</li>
+                        <li><a href="/DevManage/ParkStroe">水公园储物柜</a></li>
+                        <li class="active">@ViewBag.Type</li>
+                    </ol>
+                </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable">
+            <input type="hidden" id="Uid" value="@Html.Raw(parkstore?.DeviceID ?? 0)" />
+            <table>
+                <tr>
+                    <td><span>*</span>设备序列号:</td>
+                    <td><input type="text" id="DeviceSN" class="form-control" value="@Html.Raw(parkstore?.DeviceSN)" @Html.Raw(parkstore?.DeviceSN!=null? "readonly='readonly'":"")></td>
+                    <td><span>*</span>设备名称:</td>
+                    <td><input type="text" id="DeviceName" class="form-control" value="@Html.Raw(parkstore?.DeviceName)"></td>
+                    <td><span>*</span>起始日期:</td>
+                    @*<td><input type="text" id="StartDate" class="form-control" value="@Html.Raw(parkstore?.StartDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="StartDate" class="form-control" type="text" value="@Html.Raw(parkstore.StartDate?.ToString("yyyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                    <td><span>*</span>结束日期:</td>
+                   @* <td><input type="text" id="EndDate" class="form-control" value="@Html.Raw(parkstore?.EndDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="EndDate" class="form-control" type="text" value="@Html.Raw(parkstore.EndDate?.ToString("yyyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>*</span>是否启用:</td>
+                    <td><input type="checkbox" value="0" id="Enabled" name="Enabled" checked='checked' @Html.Raw(parkstore?.Enabled == 1 ? "checked='checked'" : "") /> </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container-footer">
+            <div class="container-footer-right">
+                <div class="container-buton-left">
+                    <a class="btn btn-default btn-block"  href="/DevManage/ParkStroe">返回</a>
+                </div>
+                <div class="container-buton-right">
+                    <button class="btn btn-primary btn-block" onclick="save();">保存</button>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/layer/layer.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.js"></script>
+    <script src="~/JS/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/JS/datecommon.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/public.js"></script>
+    <script type="text/javascript">
+        //保存数据
+        function save() {
+            if ($("#DeviceSN").val() === "") {
+                //alert("请填写设备名称");
+                layer.msg("请填写设备序列号", { icon: 2 });
+                return;
+            }
+            if ($("#DeviceName").val() === "") {
+                //alert("请填写设备名称");
+                layer.msg("请填写设备名称", { icon: 2 });
+                return;
+            }
+            if ($("#StartDate").val() === "" || $("#EndDate").val() === "") {
+                //alert("请填写时间");
+                layer.msg("请填写时间", { icon: 2 });
+                return;
+            }
+            if ($("#StartDate").val() > $("#EndDate").val()) {
+                //alert("开始时间不能大于结束时间");
+                layer.msg("开始时间不能大于结束时间", { icon: 2 });
+                return;
+            }
+            var parkstore = {
+                DeviceID: $("#Uid").val(),
+                DeviceSN: $("#DeviceSN").val(),
+                DeviceName: $("#DeviceName").val(),
+                StartDate: $("#StartDate").val(),
+                EndDate: $("#EndDate").val(),
+                Enabled: $("#Enabled").is(":checked") ? 1 : 0
+                //IPAddress: $("#IPAddress").val(),
+                //Port: $("#Port").val()
+                //Lat: $("#Lat").val(),
+                //Lng:$("#Lng").val()
+            };
+            $.HttpPost("/DevManage/SaveParkStore", { parkstore: parkstore }, function (data) {
+                if (data.State === 1) {
+                    //alert("保存成功.");
+                    layer.msg("保存成功", { icon: 1 });
+                    //跳转到前一页
+                } else {
+                    //alert("保存失败。\r\n" + data.Message);
+                    layer.msg("保存失败\r\n" + data.Message, { icon: 2 });
+
+                }
+            });
+        }
+    </script>
+</body>
+</html>

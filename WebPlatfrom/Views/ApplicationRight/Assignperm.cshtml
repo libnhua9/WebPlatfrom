@@ -1,0 +1,1163 @@
+﻿@using Web.EF;
+@using Web.Models.WebModels;
+
+@{
+    Layout = null;
+    List<UserAPI> APIList2 = ViewBag.APIList2 as List<UserAPI>;
+    List<V_User_APIFunction> APIList3 = ViewBag.APIList3 as List<V_User_APIFunction>;
+    List<Tb_User_Notify> eventUser = ViewBag.eventUser as List<Tb_User_Notify>;
+    List<EventShow> EventList = ViewBag.EventList as List<EventShow>;
+    Tb_Users user = ViewBag.User;
+    ViewBag.id = ViewBag.selId;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/Assignperm.css" rel="stylesheet" />
+    <title>分配权限</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">
+                    <img src="~/Images/current.png" />当前位置 :
+                </span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">应用权限</li>
+                        <li><a href="/ApplicationRight/AuthorityManage">权限管理</a></li>
+                        <li class="active">分配权限</li>
+                        <li class="active"><span id="suserName"></span></li>
+                    </ol>
+                </div>
+
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>功能API</span></div>
+            </div>
+
+            <div class="right-edit">
+                <button id="btnSpread-API" type="button" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </button>
+                <button id="btnRetract-API" type="button" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-API">
+            <table>
+                <tr>
+                    @{
+                        if (user.Level > 1)
+                        {
+                            if (APIList3 != null)
+                            {
+                                foreach (var api in APIList3)
+                                {
+                                    <td><label class="statelab"><input type="checkbox" name="checkbox" id="@Html.Raw(api.API_ID)" @Html.Raw(api.API_ID == 0 || api.API_ID == 1 ? "checked='checked'" : "")><span class="havalab">@Html.Raw(api.APIName)</span></label></td>
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (APIList2 != null)
+                            {
+                                foreach (var item in APIList2)
+                                {
+                                    <td><label class="statelab"><input type="checkbox" data-id="API_check" name="checkbox" value="@Html.Raw(item.API_ID)" id="@Html.Raw(item.API_ID)" @Html.Raw(item.UserId > 0 ? "checked='checked'" : "")><span class="havalab">@Html.Raw(item.APIName)</span></label></td>
+                                }
+                            }
+                        }
+                    }
+                </tr>
+            </table>
+            <div class="container-footer-right" id="divAPI">
+                <div class="container-buton-left">
+                    <button class="btn btn-default btn-block" id="APICancel" name="ShowUser">取消</button>
+                </div>
+                <div class="container-buton-right">
+                    <button class="btn btn-primary btn-block" id="APISave" name="ShowUser" onclick="SaveAPI()">保存</button>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+
+        @*事件推送*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>事件推送</span></div>
+            </div>
+
+            <div class="right-edit">
+                <button id="btnSpread-event" type="button" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </button>
+                <button id="btnRetract-event" type="button" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-event">
+            <table>
+
+                @{
+
+                    if (user.Level > 1)
+                    {
+
+                        if (eventUser != null)
+                        {
+                            foreach (var item in eventUser)
+                            {
+                                switch (item.EventTypeID)
+                                {
+                                    case 0:
+                                        <tr>
+                                            <td><span><input type="checkbox" data-id="Event_check" value="@Html.Raw(item.EventTypeID)" name="checkbox" checked="checked" /></span></td>
+                                            <td>水公园储物柜</td>
+                                            <td><span>url</span></td>
+                                            <td><input type="text" class="form-control" id="txt_@Html.Raw(item.EventTypeID)" value="@Html.Raw(item.URL)" readonly="readonly"></td>
+
+                                        </tr>
+                                        break;
+                                    case 1:
+                                        <tr>
+                                            <td><span><input type="checkbox" data-id="Event_check" value="@Html.Raw(item.EventTypeID)" name="checkbox" checked="checked" /></span></td>
+                                            <td>客流计事件</td>
+                                            <td><span>url</span></td>
+                                            <td><input type="text" class="form-control" id="txt_@Html.Raw(item.EventTypeID)" value="@Html.Raw(item.URL)" readonly="readonly"></td>
+                                        </tr>
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+
+                        if (EventList != null)
+                        {
+                            foreach (var item in EventList)
+                            {
+                                switch (item.EventTypeID)
+                                {
+                                    case 0:
+                                        <tr>
+                                            <td><span><input type="checkbox" data-id="Event_check" name="checkbox" value="@Html.Raw(item.EventTypeID)" @Html.Raw(item.UserID > 0 ? "checked='checked'" : "") /></span></td>
+                                            <td>水公园储物柜</td>
+                                            <td><span>url</span></td>
+                                            <td><input type="text" class="form-control" id="txt_@Html.Raw(item.EventTypeID)" value="@Html.Raw(item.URL)"></td>
+
+                                        </tr>
+                                        break;
+                                    case 1:
+                                        <tr>
+                                            <td><span><input type="checkbox" data-id="Event_check" name="checkbox" value="@Html.Raw(item.EventTypeID)" @Html.Raw(item.UserID > 0 ? "checked='checked'" : "") /></span></td>
+                                            <td>客流计事件</td>
+                                            <td><span>url</span></td>
+                                            <td><input type="text" class="form-control" id="txt_@Html.Raw(item.EventTypeID)" value="@Html.Raw(item.URL)"></td>
+                                        </tr>
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+
+                    }
+
+
+
+                }
+
+            </table>
+            <div class="container-footer-right" id="divEvent">
+                <div class="container-buton-left">
+                    <button class="btn btn-default btn-block">取消</button>
+                </div>
+                <div class="container-buton-right">
+                    <button class="btn btn-primary btn-block" onclick="SaveEvent()">保存</button>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+        @*TVM*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>TVM</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-TVM" onclick="SaveTvm()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-TVM" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-TVM" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-TVM">
+            @*<table class="table table-striped tabtr container-table" id="tbDeviceList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*M4出口闸机M4Channel*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>M4出口闸机</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-M4" onclick="SaveM4Channel()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-M4Channel" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-M4Channel" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-M4Channel">
+            @*<table class="table table-striped tabtr container-table" id="tbDeviceM4List">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*安全检票闸机Ticket*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>安全检票闸机</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-Ticket" onclick="SaveTicket()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-Ticket" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-Ticket" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-Ticket">
+            @*<table class="table table-striped tabtr" id="tbDeviceTicketList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*水公园储物柜ParkStroe*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>水公园储物柜</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-ParkStroe" onclick="SaveParkStroe()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-ParkStroe" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-ParkStroe" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-ParkStroe">
+            @*<table class="table table-striped tabtr" id="tbDeviceParkStroeList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*自助储物柜SelfCabine*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>自助储物柜</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-SelfCabine" onclick="SaveSelfCabine()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-SelfCabine" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-SelfCabine" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-SelfCabine">
+            @*<table class="table table-striped tabtr" id="tbDeviceSelfCabineList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*海康DVR*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>海康DVR</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-DVR" onclick="SaveDVR()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-DVR" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-DVR" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-DVR">
+            @*<table class="table table-striped tabtr" id="tbDeviceDVRList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*LED显示屏*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>LED显示屏</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-LED" onclick="SaveLED()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-LED" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-LED" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-LED">
+            @*<table class="table table-striped tabtr" id="tbDeviceLEDList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        @*客流计ESensor*@
+        <div class="container-header">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>客流计</span></div>
+            </div>
+            <div class="right-edit">
+                <a id="btnRetract-save-ESensor" onclick="SaveESensor()" name="ShowUser" class="btn btn-primary  ">
+                    保存
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                <a id="btnSpread-ESensor" class="btn btn-primary  ">
+                    展开
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </a>
+                <a id="btnRetract-ESensor" class="btn btn-primary  ">
+                    收起
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable-ESensor">
+            @*<table class="table table-striped tabtr" id="tbDeviceESensorList">
+                <thead>
+                    <tr>
+                        <th class="check-header hidden-xs">
+
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+        <div class="admintable-ESensor-divfen"></div>
+    </div>
+
+    <script src="~/JS/jquery-3.1.0.min.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/public.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/JS/dataTables.bootstrap.js"></script>
+    <script src="~/JS/Assignperm.js"></script>
+    <script src="/JS/trchecked.js"></script>    <script type="text/javascript">
+        //点击tr选中
+        var arr=new Array("admintable-TVM","admintable-M4Channel","admintable-Ticket","admintable-ParkStroe","admintable-SelfCabine","admintable-DVR","admintable-LED","admintable-ESensor");
+        for(var i=0;i<arr.length;i++)
+        {
+            $("#container-body ."+arr[i]).on("click", "tr", function () {
+                var input = $(this).find("input");
+                if (!$(input).prop("checked")) {
+                    $(input).prop("checked", true);
+                } else {
+                    $(input).prop("checked", false);
+                }
+            });
+            $(".container-table").on("click", "input", function (event) {
+                event.stopImmediatePropagation();
+            });
+        }
+        
+        // 获取浏览器窗口的可视区域的高度
+        function getViewPortHeight() {
+            return document.documentElement.clientHeight || document.body.clientHeight;
+        }
+      
+        function resizeContainer() {
+            var h = getViewPortHeight();
+            var ch = $("#container-body").height();
+            //alert(ch);
+            if (ch < h - 15) {
+                $("#container-body").height(h - 15);
+            }
+            else {
+                $("#container-body").css("height", "auto");
+            }
+        }
+        var K=0;
+        $(function() {
+            var username = "@Request["username"]";
+            //console.log(username);
+            $("#suserName").html(username);
+
+            $(".right-edit #btnRetract-API").click(function() {
+                $(".admintable-API").css("display", "none");
+                $("#btnRetract-API").css("display", "none");
+                $("#btnSpread-API").css("display", "block");
+            });
+            $(".right-edit #btnSpread-API").click(function() {
+                $(".admintable-API").css("display", "block");
+                $("#btnRetract-API").css("display", "block");
+                $("#btnSpread-API").css("display", "none");
+            });
+            $(".right-edit #btnSpread-event").click(function() {
+                $("#btnRetract-event").css("display", "block");
+                $("#btnSpread-event").css("display", "none");
+                $(".admintable-event").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-event").click(function() {
+                $("#btnRetract-event").css("display", "none");
+                $("#btnSpread-event").css("display", "block");
+                $(".admintable-event").css("display", "none");
+
+            });
+            $(".right-edit #btnSpread-TVM").click(function() {
+                GetList(@user.Level, @ViewBag.id);
+                $("#btnRetract-TVM").css("display", "block");
+                $("#btnRetract-TVM").css("float", "right");
+                $("#btnRetract-TVM").css("margin-left", "5px");
+                $("#btnSpread-TVM").css("display", "none");
+                $(".admintable-TVM").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-TVM").click(function() {
+                $("#btnRetract-TVM").css("display", "none");
+                $("#btnSpread-TVM").css("display", "block");
+                $("#btnSpread-TVM").css("margin-left", "5px");
+                $("#btnSpread-TVM").css("float", "right");
+                $(".admintable-TVM").css("display", "none");
+
+            });
+            @*M4出口闸机M4Channel*@
+            $(".right-edit #btnSpread-M4Channel").click(function() {
+                GetM4List(@user.Level, @ViewBag.id);
+
+                $("#btnRetract-M4Channel").css("display", "block");
+                $("#btnRetract-M4Channel").css("float", "right");
+                $("#btnRetract-M4Channel").css("margin-left", "5px");
+                $("#btnSpread-M4Channel").css("display", "none");
+                $(".admintable-M4Channel").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-M4Channel").click(function() {
+                $("#btnRetract-M4Channel").css("display", "none");
+                $("#btnSpread-M4Channel").css("display", "block");
+                $("#btnSpread-M4Channel").css("margin-left", "5px");
+                $("#btnSpread-M4Channel").css("float", "right");
+                $(".admintable-M4Channel").css("display", "none");
+
+            });
+            @*安全检票闸机Ticket*@
+            $(".right-edit #btnSpread-Ticket").click(function() {
+                GetTicketList(@user.Level, @ViewBag.id);
+                $("#btnRetract-Ticket").css("display", "block");
+                $("#btnRetract-Ticket").css("float", "right");
+                $("#btnRetract-Ticket").css("margin-left", "5px");
+                $("#btnSpread-Ticket").css("display", "none");
+                $(".admintable-Ticket").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-Ticket").click(function() {
+                $("#btnRetract-Ticket").css("display", "none");
+                $("#btnSpread-Ticket").css("display", "block");
+                $("#btnSpread-Ticket").css("margin-left", "5px");
+                $("#btnSpread-Ticket").css("float", "right");
+                $(".admintable-Ticket").css("display", "none");
+
+            });
+            @*水公园储物柜ParkStroe*@
+            $(".right-edit #btnSpread-ParkStroe").click(function() {
+                GetParkStoreList(@user.Level, @ViewBag.id);
+                $("#btnRetract-ParkStroe").css("display", "block");
+                $("#btnRetract-ParkStroe").css("float", "right");
+                $("#btnRetract-ParkStroe").css("margin-left", "5px");
+                $("#btnSpread-ParkStroe").css("display", "none");
+                $(".admintable-ParkStroe").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-ParkStroe").click(function() {
+                $("#btnRetract-ParkStroe").css("display", "none");
+                $("#btnSpread-ParkStroe").css("display", "block");
+                $("#btnSpread-ParkStroe").css("margin-left", "5px");
+                $("#btnSpread-ParkStroe").css("float", "right");
+                $(".admintable-ParkStroe").css("display", "none");
+
+            });
+            @*自助储物柜SelfCabine*@
+            $(".right-edit #btnSpread-SelfCabine").click(function() {
+                GetSelfCabinetList(@user.Level, @ViewBag.id);
+                $("#btnRetract-SelfCabine").css("display", "block");
+                $("#btnRetract-SelfCabine").css("float", "right");
+                $("#btnRetract-SelfCabine").css("margin-left", "5px");
+                $("#btnSpread-SelfCabine").css("display", "none");
+                $(".admintable-SelfCabine").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-SelfCabine").click(function() {
+                $("#btnRetract-SelfCabine").css("display", "none");
+                $("#btnSpread-SelfCabine").css("display", "block");
+                $("#btnSpread-SelfCabine").css("margin-left", "5px");
+                $("#btnSpread-SelfCabine").css("float", "right");
+                $(".admintable-SelfCabine").css("display", "none");
+
+            });
+            @*海康DVR*@
+            $(".right-edit #btnSpread-DVR").click(function() {
+                GetDVRList(@user.Level, @ViewBag.id);
+                $("#btnRetract-DVR").css("display", "block");
+                $("#btnRetract-DVR").css("float", "right");
+                $("#btnRetract-DVR").css("margin-left", "5px");
+                $("#btnSpread-DVR").css("display", "none");
+                $(".admintable-DVR").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-DVR").click(function() {
+                $("#btnRetract-DVR").css("display", "none");
+                $("#btnSpread-DVR").css("display", "block");
+                $("#btnSpread-DVR").css("margin-left", "5px");
+                $("#btnSpread-DVR").css("float", "right");
+                $(".admintable-DVR").css("display", "none");
+
+            });
+            @*LED显示屏*@
+            $(".right-edit #btnSpread-LED").click(function() {
+                GetLEDList(@user.Level, @ViewBag.id);
+                $("#btnRetract-LED").css("display", "block");
+                $("#btnRetract-LED").css("float", "right");
+                $("#btnRetract-LED").css("margin-left", "5px");
+                $("#btnSpread-LED").css("display", "none");
+                $(".admintable-LED").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-LED").click(function() {
+                $("#btnRetract-LED").css("display", "none");
+                $("#btnSpread-LED").css("display", "block");
+                $("#btnSpread-LED").css("margin-left", "5px");
+                $("#btnSpread-LED").css("float", "right");
+                $(".admintable-LED").css("display", "none");
+
+            });
+            @*客流计ESensor*@
+            $(".right-edit #btnSpread-ESensor").click(function() {
+                GeteSensorList(@user.Level, @ViewBag.id);
+                $("#btnRetract-ESensor").css("display", "block");
+                $("#btnRetract-ESensor").css("float", "right");
+                $("#btnRetract-ESensor").css("margin-left", "5px");
+                $("#btnSpread-ESensor").css("display", "none");
+                $(".admintable-ESensor").css("display", "block");
+
+            });
+            $(".right-edit #btnRetract-ESensor").click(function() {
+                $("#btnRetract-ESensor").css("display", "none");
+                $("#btnSpread-ESensor").css("display", "block");
+                $("#btnSpread-ESensor").css("margin-left", "5px");
+                $("#btnSpread-ESensor").css("float", "right");
+                $(".admintable-ESensor").css("display", "none");
+
+            });
+            if (@user.Level > 1) {
+                $("input[name='checkbox']").attr("disabled", "disabled");
+                //data-id="ShowUser"
+                //$("input[data-id='ShowUser']").attr("style","display:none");
+                $("#APICancel").hide();
+                $("#APISave").hide();
+                $("#btnRetract-save-TVM").hide();
+                $("#btnRetract-save-M4").hide();
+                $("#btnRetract-save-Ticket").hide();
+                $("#btnRetract-save-ParkStroe").hide();
+                $("#btnRetract-save-SelfCabine").hide();
+                $("#btnRetract-save-DVR").hide();
+                $("#btnRetract-save-LED").hide();
+                $("#btnRetract-save-ESensor").hide();
+
+
+            } else {
+
+            }
+
+            resizeContainer();
+            $(window).resize(resizeContainer);
+        });
+
+
+        ////接口分配
+        function SaveAPI(){
+            var count=$("input[data-id='API_check']").length;
+            var str="";
+            $("input[data-id='API_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+            $.HttpPost("/ApplicationRight/AddAndDelAPI", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+                    alert("保存成功！");
+
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+
+        }
+
+        function CheckURL(url){
+            var re="((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\&%_\./-~-]*)?";
+            var rex=new RegExp(re);
+            if(rex.test(url)){
+                return true;
+            }else{
+                return false;
+            }
+            //rex.test(url)
+        }
+
+
+
+        function SaveEvent(){
+            var url= $("#txt_1").val();
+            var url1= $("#txt_0").val();
+            //if(CheckURL(url)){
+            //    if(CheckURL(url1)){
+
+            //    }else{
+            //        alert("请填写正确的URL!");
+            //}
+            //}else{
+            //    alert("请填写正确的URL!");
+            //}
+            var count=$("input[data-id='Event_check']").length;
+            $("input[data-id='Event_check']").each(function(){
+                //alert($(this).is(':checked'));
+                if($(this).is(':checked')){
+                    //alert($(this).val());
+                    count--;
+                    if(CheckURL($("#txt_"+$(this).val()).val())){
+                        AddEvent($(this).val(),count);
+                    }else{
+                        alert("请填写正确的URL!");
+                    }
+
+
+                }else{
+                    count--;
+                    DelEvent($(this).val(),count);
+                }
+            });
+
+        }
+        ///保存TVM
+        function SaveTvm(){
+            var count=$("input[data-id='TVM_check']").length;
+            var str="";
+            $("input[data-id='TVM_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelTVM", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+                    alert("保存成功");
+
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+        ///保存M4Channel
+        function SaveM4Channel(){
+            var count=$("input[data-id='M4_check']").length;
+            var str="";
+            $("input[data-id='M4_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelM4Channel", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功！");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+        ///保存Ticket安全检票闸机
+        function SaveTicket(){
+            var count=$("input[data-id='Ticket_check']").length;
+            var str="";
+            $("input[data-id='Ticket_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelTicket", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+
+        ///保存ParkStore水公园储物柜
+        function SaveParkStroe(){
+            var count=$("input[data-id='ParkStroe_check']").length;
+            var str="";
+            $("input[data-id='ParkStroe_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelParkStore", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+        ///保存SelfCabine自助储物柜
+        function SaveSelfCabine(){
+            var count=$("input[data-id='SelfCabine_check']").length;
+            var str="";
+            $("input[data-id='SelfCabine_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelSelfCabinet", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+        ///保存海康DVR
+        function SaveDVR(){
+            var count=$("input[data-id='DVR_check']").length;
+            var str="";
+            $("input[data-id='DVR_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelDVR", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+        ///保存LED显示屏
+        function SaveLED(){
+            var count=$("input[data-id='LED_check']").length;
+            var str="";
+            $("input[data-id='LED_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDelLED", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+        ///保存客流计
+        function SaveESensor(){
+            var count=$("input[data-id='ESensor_check']").length;
+            var str="";
+            $("input[data-id='ESensor_check']").each(function(){
+                count--;
+                if($(this).is(':checked')){
+                    if(count==0){
+                        str+=$(this).val()+","+true;
+                    }else{
+                        str+=$(this).val()+","+true+";";
+                    }
+
+
+                }else{
+                    if(count==0){
+                        str+=$(this).val()+","+false;
+                    }else{
+                        str+=$(this).val()+","+false+";";
+                    }
+
+                }
+
+            });
+
+            $.HttpPost("/ApplicationRight/AddAndDeleSensor", { Array: str,UserID:@ViewBag.id }, function (data) {
+                if (data.State === 1) {
+
+                    alert("保存成功");
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+
+        function AddEvent(EventTypeID,count){
+
+
+        var Notify = {
+            UserID : @ViewBag.id,
+            EventTypeID: EventTypeID,
+            URL: $("#txt_"+EventTypeID).val()
+        };
+
+            //alert(Notify);
+            $.HttpPost("/ApplicationRight/AddEvent", { Notify: Notify }, function (data) {
+                if (data.State === 1) {
+                    if(count==0){ alert("保存成功.");}
+                //跳转到前一页
+
+            } else {
+                alert("保存失败。\r\n" + data.Message);
+            }
+            });
+
+        }
+        function DelEvent(EventTypeID,count){
+            var Notify = {
+                UserID : @ViewBag.id,
+                EventTypeID: EventTypeID
+            };
+
+            //alert(Notify);
+            $.HttpPost("/ApplicationRight/DelEvent", { Notify: Notify }, function (data) {
+                if (data.State === 1) {
+                    if(count==0){ alert("保存成功.");}
+                    //跳转到前一页
+
+                } else {
+                    alert("保存失败。\r\n" + data.Message);
+                }
+            });
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

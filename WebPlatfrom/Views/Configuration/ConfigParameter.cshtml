@@ -1,0 +1,262 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <title></title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        body {
+            padding: 9px;
+            overflow-x: hidden;
+        }
+
+        #container-body {
+            width: 100%;
+            border: 1px solid #DFDFDF;
+            background-color: #FFF;
+        }
+
+            /*/*
+                     * 主体内容头部
+                     */
+            #container-body > .container-header {
+                padding: 10px;
+                border-bottom: 1px solid #DFDFDF;
+            }
+
+                /*
+                     * 左侧导航栏
+                     */
+                #container-body > .container-header > .left {
+                    float: left;
+                    width: 50%;
+                }
+                    /*当前位置图标*/
+                    #container-body > .container-header > .left > .breadcrumb-left img {
+                        padding: 0 5px 3px 0;
+                    }
+
+            #container-body .breadcrumb {
+                padding: 8px 0px;
+                margin-bottom: 0px;
+                background-color: #FFF;
+            }
+
+                #container-body .breadcrumb > li + li:before {
+                    content: ">\00a0";
+                }
+
+                #container-body .breadcrumb > li > a {
+                    color: #333;
+                }
+
+                    #container-body .breadcrumb > li > a:focus,
+                    #container-body .breadcrumb > li > a:hover {
+                        text-decoration: none;
+                        color: #008ECA;
+                    }
+
+                #container-body .breadcrumb .active {
+                    color: #333;
+                }
+
+
+            #container-body .breadcrumb-left {
+                padding: 8px;
+                float: left;
+            }
+
+
+
+            #container-body > .admintable {
+                padding: 10px;
+                margin-top: 25px;
+                border-bottom: 1px solid #DFDFDF;
+            }
+
+                #container-body > .admintable > table {
+                    width: 450px;
+                    margin: 1px auto;
+                }
+
+                    #container-body > .admintable > table tr > td:first-child {
+                        padding: 10px 0px 10px 10px;
+                    }
+
+                    #container-body > .admintable > table tr > td:last-child {
+                        padding: 10px 10px 10px 0px;
+                    }
+
+                    #container-body > .admintable > table tr > td {
+                        padding: 10px;
+                    }
+
+                    #container-body > .admintable > table td > span {
+                        color: #f00;
+                        padding-right: 2px;
+                    }
+
+
+            #container-body > .container-footer > .container-footer-right {
+                float: right;
+                margin-bottom: 20px;
+            }
+
+            #container-body > .container-footer .container-buton-left {
+                float: left;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+            #container-body > .container-footer .container-buton-right {
+                float: right;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+
+            #container-body .left-edit {
+                float: left;
+                padding: 7px 0 0 10px;
+            }
+
+                #container-body .left-edit .left-edit-title {
+                    border-left: #17AEE3 solid 3px;
+                    padding-left: 10px;
+                }
+
+            #container-body .right-edit {
+                float: right;
+            }
+                /*#container-body .container-header {
+         margin-top:30px;
+         border-top:1px solid #DFDFDF;
+         font-size:12px;
+        }*/
+                #container-body .right-edit > .btn {
+                    border-radius: 15px;
+                    outline: none;
+                }
+    </style>
+</head>
+<body>
+<div id="container-body">
+    <div class="container-header">
+        <div class="left">
+            <span class="breadcrumb-left"><img src="~/Images/current.png" />当前位置 :</span>
+            <ol class="breadcrumb">
+                <li class="active">系统配置</li>
+                <li class="active">配置参数</li>
+            </ol>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="admintable">
+        <table>
+            <tr>
+                <td><span>*</span> 二进制服务端口</td>
+                <td><input type="text" id="txtBinary" class="form-control" value="@ViewBag.Binary"></td>
+                <td><button class="btn btn-primary btn-block" onclick="GetSaveConfig(0)">保存</button></td>
+            </tr>
+            <tr>
+                <td><span>*</span>JSon服务端口</td>
+                <td><input type="text" id="txtJson" class="form-control" value="@ViewBag.Json"></td>
+                <td><button class="btn btn-primary btn-block" onclick="GetSaveConfig(1)">保存</button></td>
+            </tr>
+            <tr>
+                <td><span>*</span>消息服务端口</td>
+                <td><input type="text" id="txtMsg" class="form-control"  value="@ViewBag.Msg"></td>
+                <td><button class="btn btn-primary btn-block" onclick="GetSaveConfig(2)">保存</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container-header">
+        <div class="left-edit">
+            <div class="left-edit-title"><span>通信状态 :<span  id="Status" style="color: #ff0000;">@ViewBag.Status</span></span></div>
+        </div>
+
+        <div class="right-edit">
+            <button id="btnStart" type="button" class="btn btn-success " onclick="GetService(1)">
+                启动
+                <span class="glyphicon glyphicon glyphicon-play" aria-hidden="true"></span>
+            </button>
+            <button id="btnStop" type="button" class="btn btn-danger " onclick="GetService(2)">
+                停止
+                <span class="glyphicon glyphicon glyphicon-pause" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+<script src="~/JS/jquery-3.1.0.min.js"></script>
+<script src="~/JS/layer/layer.js"></script>
+<script src="~/JS/commonheight.js"></script>
+<script>
+    $(function() {
+
+
+    });
+    //保存配置
+    function GetSaveConfig(type) {
+       
+       
+        var value = "";
+        switch (type) {
+            
+     
+        case 0:
+            if ($("#txtBinary").val() === "") {
+                layer.alert("请填写二进制端口");
+                return;
+            }
+            value = $("#txtBinary").val();
+            break;
+        case 1:
+            if ($("#txtJson").val() === "") {
+                layer.alert("请填写JSon服务端口");
+                return;
+            }
+            value = $("#txtJson").val();
+            break;
+        case 2:
+            if ($("#txtMsg").val() === "") {
+                layer.alert("请填写消息服务端口");
+                return;
+            }
+            value = $("#txtMsg").val();
+            break;
+        default:
+            break;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Configuration/SaveConfig",
+            data: { type: type, value: value },
+            dataType: "text",
+            success: function (data) {
+                layer.alert(data);
+            }
+        });
+    }
+
+    //服务器启动、关闭
+    function GetService(type) {
+        $.ajax({
+            type: "GET",
+            url: "/Configuration/Service",
+            data: { type: type },
+            dataType: "json",
+            success: function (data) {
+                $("#Status").text("");
+                $("#Status").text(data.status);
+                layer.alert(data.result);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
+

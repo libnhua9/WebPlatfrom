@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F95785B8-6C4E-45A3-8353-D0AB716AF2D1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocomSDK461, Version=1.0.6317.20189, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\DocomSDK461.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\项目备份\Web\Web\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Commons\DbHelper.cs" />
+    <Compile Include="Commons\ExtHelper.cs" />
+    <Compile Include="Commons\MenuReader.cs" />
+    <Compile Include="Commons\NoAuthAttribute.cs" />
+    <Compile Include="Commons\WebAuthAttribute.cs" />
+    <Compile Include="Controllers\AccManageController.cs" />
+    <Compile Include="Controllers\ApplicationRightController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\DevManageController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MonitoringController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="EF\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_DocomPay_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_eSensor_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_FaceAPI_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_LED_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_M4Channel_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_Parking_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_ParkStore_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_SelfCabinet_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_Ticket_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_Tts_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\P_Logs_TVM_Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Ad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_APIFunction.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_API_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TB_Config.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_LcdAd.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_LED.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_Parking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Device_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_DevsInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_EventType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Face_Feature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Face_Group.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Face_Image.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_LcdAd_Plan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_LedAd.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_DocomPay.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_FaceAPI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_LedCall.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_Parking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_TTS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Logs_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_RecordFile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_Led.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Status_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_UI_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_LcdAd.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_LED.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_LedAd.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_Parking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_Subsystem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_Users_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_User_Notify.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tb_User_Ticket_Ad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_eSensor_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_M4Channel_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_Parking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_Parking_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_ParkStore_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_SelfCabinet_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_Ticket_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Device_Logs_TVM_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_eSensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_FaceFeature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_LED.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Logs_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Logs_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Logs_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Logs_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Logs_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Notify_List.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Parking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Sensor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_SensorLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_DVRNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_eSensorNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_LED.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_LEDNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_M4ChannelNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_ParkStoreNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_SelfCabinetNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_TicketNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Status_TVMNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_FP_TicketUI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_LcdAd.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_API.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_DocomPay.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_DocomPay_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_FaceAPI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_FaceAPI_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_PayAPI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_Tts.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_Tts_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Logs_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_M4Chanel_FP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_DVR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_DVRNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_eSensorNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_LED.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_LEDNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_M4Channel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_M4ChannelNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_ParkStore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_ParkStoreNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_SelfCabinet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_SelfCabinetNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_Ticket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_TicketNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_TVM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Status_TVMNull.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_SubscriptionEvet_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Test.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_Test_Temp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_TVM_FP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\V_User_APIFunction.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModels\ActionJsonResult.cs" />
+    <Compile Include="Models\WebModels\DeviceAllocation.cs" />
+    <Compile Include="Models\WebModels\DeviceMode.cs" />
+    <Compile Include="Models\WebModels\LoginParam.cs" />
+    <Compile Include="Models\WebModels\PageSearchResult.cs" />
+    <Compile Include="Models\WebModels\PasswordChange.cs" />
+    <Compile Include="Models\WebModels\SearchParam.cs" />
+    <Compile Include="Models\WebModels\SessionKeys.cs" />
+    <Compile Include="Models\WebModels\StatusTicket.cs" />
+    <Compile Include="Models\WebModels\UsersSubsystem.cs" />
+    <Compile Include="Models\WebModels\UserAPI.cs" />
+    <Compile Include="Models\WebModels\UserPermissionItem.cs" />
+    <Compile Include="Models\WebModels\UserShow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSS\AdminDev.css" />
+    <Content Include="CSS\Assignperm.css" />
+    <Content Include="CSS\BarLeft.css" />
+    <Content Include="CSS\bootstrap-datetimepicker.css" />
+    <Content Include="CSS\bootstrap-datetimepicker.min.css" />
+    <Content Include="CSS\bootstrap-theme.css" />
+    <Content Include="CSS\bootstrap-theme.min.css" />
+    <Content Include="CSS\bootstrap.css" />
+    <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\Common.css" />
+    <Content Include="CSS\ConfigPar.css" />
+    <Content Include="CSS\dataTables.bootstrap.css" />
+    <Content Include="CSS\dataTables.bootstrap.min.css" />
+    <Content Include="CSS\DeviceConfig.css" />
+    <Content Include="CSS\IE.css" />
+    <Content Include="CSS\jquery.dataTables.min.css" />
+    <Content Include="CSS\Login.css" />
+    <Content Include="CSS\Main.css" />
+    <Content Include="CSS\manacommon.css" />
+    <Content Include="CSS\manager.css" />
+    <Content Include="CSS\MapHeader.css" />
+    <Content Include="CSS\Report.css" />
+    <Content Include="CSS\Status.css" />
+    <Content Include="CSS\SubSystemConfig.css" />
+    <Content Include="DocomSDK461.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EF\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\AccountImg\gly1.png" />
+    <Content Include="Images\AccountImg\gly2.png" />
+    <Content Include="Images\AccountImg\kfz1.png" />
+    <Content Include="Images\AccountImg\kfz2.png" />
+    <Content Include="Images\alert.png" />
+    <Content Include="Images\ApplicationRightImg\quanxian1.png" />
+    <Content Include="Images\ApplicationRightImg\quanxian2.png" />
+    <Content Include="Images\ApplicationRightImg\quanxianguanli1.png" />
+    <Content Include="Images\ApplicationRightImg\quanxianguanli2.png" />
+    <Content Include="Images\backlogo.png" />
+    <Content Include="Images\ConfigurationImg\canshu1.png" />
+    <Content Include="Images\ConfigurationImg\canshu2.png" />
+    <Content Include="Images\ConfigurationImg\shouquan1.png" />
+    <Content Include="Images\ConfigurationImg\shouquan2.png" />
+    <Content Include="Images\ConfigurationImg\参数.png" />
+    <Content Include="Images\ConfigurationImg\参数_45.png" />
+    <Content Include="Images\ConfigurationImg\授权.png" />
+    <Content Include="Images\ConfigurationImg\授权_9.png" />
+    <Content Include="Images\current.png" />
+    <Content Include="Images\daohang\fenxihebaobiao-_46.png" />
+    <Content Include="Images\daohang\shebeiguangli_57.png" />
+    <Content Include="Images\daohang\shishijiankong_2.png" />
+    <Content Include="Images\daohang\xitongpeizhi.png" />
+    <Content Include="Images\daohang\yiyongquanxian_84.png" />
+    <Content Include="Images\daohang\zhanghaoguangli_42.png" />
+    <Content Include="Images\DeviceManageImg\chuwugui1.png" />
+    <Content Include="Images\DeviceManageImg\chuwugui2.png" />
+    <Content Include="Images\DeviceManageImg\disanfang1.png" />
+    <Content Include="Images\DeviceManageImg\disanfang2.png" />
+    <Content Include="Images\DeviceManageImg\fangmai1.png" />
+    <Content Include="Images\DeviceManageImg\fangmai2.png" />
+    <Content Include="Images\DeviceManageImg\menjing1.png" />
+    <Content Include="Images\DeviceManageImg\menjing2.png" />
+    <Content Include="Images\DeviceManageImg\tongdao1.png" />
+    <Content Include="Images\DeviceManageImg\tongdao2.png" />
+    <Content Include="Images\DeviceManageImg\zhidong1.png" />
+    <Content Include="Images\DeviceManageImg\zhidong2.png" />
+    <Content Include="Images\DeviceManageImg\zhumian1.png" />
+    <Content Include="Images\DeviceManageImg\zhumian2.png" />
+    <Content Include="Images\Device\LED在线.gif" />
+    <Content Include="Images\Device\LED离线.gif" />
+    <Content Include="Images\Device\M4闸机在线.gif" />
+    <Content Include="Images\Device\M4闸机离线.gif" />
+    <Content Include="Images\Device\安全检查闸机在线.gif" />
+    <Content Include="Images\Device\安全检查闸机离线.gif" />
+    <Content Include="Images\Device\客流计在线.gif" />
+    <Content Include="Images\Device\客流计离线.gif" />
+    <Content Include="Images\Device\水公园储物柜.gif" />
+    <Content Include="Images\Device\水公园储物柜在线.gif" />
+    <Content Include="Images\Device\海康DVR在线.gif" />
+    <Content Include="Images\Device\海康DVR离线.gif" />
+    <Content Include="Images\Device\自助储物柜在线.gif" />
+    <Content Include="Images\Device\自助储物柜离线.gif" />
+    <Content Include="Images\Device\自助售票在线.gif" />
+    <Content Include="Images\Device\自助售票离线.gif" />
+    <Content Include="Images\down1.jpg" />
+    <Content Include="Images\down2.jpg" />
+    <Content Include="Images\IE.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\Monitoring\ditu1.png" />
+    <Content Include="Images\Monitoring\ditu2.png" />
+    <Content Include="Images\Monitoring\jiekoujiaohu1.png" />
+    <Content Include="Images\Monitoring\jiekoujiaohu2.png" />
+    <Content Include="Images\Monitoring\shebeijiaohu1.png" />
+    <Content Include="Images\Monitoring\shebeijiaohu2.png" />
+    <Content Include="Images\Monitoring\shebeizhuangtai1.png" />
+    <Content Include="Images\Monitoring\shebeizhuangtai2.png" />
+    <Content Include="Images\nav-menu-icon\fenxihebaobiao.png" />
+    <Content Include="Images\nav-menu-icon\shebeiguangli.png" />
+    <Content Include="Images\nav-menu-icon\shishijiankong.png" />
+    <Content Include="Images\nav-menu-icon\xitongpeizhi.png" />
+    <Content Include="Images\nav-menu-icon\yiyongquanxian.png" />
+    <Content Include="Images\nav-menu-icon\zhanghaoguangli.png" />
+    <Content Include="Images\ProtectionImg\圆角矩形-8.png" />
+    <Content Include="Images\ProtectionImg\圆角矩形-8_63.png" />
+    <Content Include="Images\ProtectionImg\接口-%281%29.png" />
+    <Content Include="Images\ProtectionImg\接口-%281%29_46.png" />
+    <Content Include="Images\ProtectionImg\设备.png" />
+    <Content Include="Images\ProtectionImg\设备_84.png" />
+    <Content Include="Images\pwd.png" />
+    <Content Include="Images\Report\day1.png" />
+    <Content Include="Images\Report\day2.png" />
+    <Content Include="Images\Report\daycurr.png" />
+    <Content Include="Images\Report\jiekou1.png" />
+    <Content Include="Images\Report\jiekou2.png" />
+    <Content Include="Images\Report\month1.png" />
+    <Content Include="Images\Report\month2.png" />
+    <Content Include="Images\Report\most.png" />
+    <Content Include="Images\Report\shebei1.png" />
+    <Content Include="Images\Report\shebei2.png" />
+    <Content Include="Images\Report\small.png" />
+    <Content Include="Images\select.png" />
+    <Content Include="Images\shebeitu.png" />
+    <Content Include="Images\unselect.png" />
+    <Content Include="Images\up1.jpg" />
+    <Content Include="Images\up2.jpg" />
+    <Content Include="Images\user1.jpg" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\username.png" />
+    <Content Include="JS\ai.0.22.9-build00167.js" />
+    <Content Include="JS\ai.0.22.9-build00167.min.js" />
+    <Content Include="JS\Assignperm.js" />
+    <Content Include="JS\bootstrap-datetimepicker.js" />
+    <Content Include="JS\bootstrap-datetimepicker.min.js" />
+    <Content Include="JS\bootstrap.js" />
+    <Content Include="JS\bootstrap.min.js" />
+    <Content Include="JS\commondrop.js" />
+    <Content Include="JS\commonheight.js" />
+    <Content Include="JS\dataTables.bootstrap.js" />
+    <Content Include="JS\dataTables.bootstrap.min.js" />
+    <Content Include="JS\datecommon.js" />
+    <Content Include="JS\echarts-map.js" />
+    <Content Include="JS\echarts-original-map.js" />
+    <Content Include="JS\echarts-original.js" />
+    <Content Include="JS\echarts.js" />
+    <Content Include="JS\esl.js" />
+    <EntityDeploy Include="EF\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EF\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="JS\jquery-3.1.0.intellisense.js" />
+    <Content Include="JS\jquery-1.7.2.min.js" />
+    <Content Include="JS\jquery-3.1.0.js" />
+    <Content Include="JS\jquery-3.1.0.min.js" />
+    <Content Include="JS\jquery-3.1.0.slim.js" />
+    <Content Include="JS\jquery-3.1.0.slim.min.js" />
+    <Content Include="JS\jquery.dataTables.min.js" />
+    <Content Include="JS\jQuery.plus.js" />
+    <Content Include="JS\jquery.unobtrusive-ajax.js" />
+    <Content Include="JS\jquery.unobtrusive-ajax.min.js" />
+    <None Include="JS\jquery.validate-vsdoc.js" />
+    <Content Include="JS\jquery.validate.js" />
+    <Content Include="JS\jquery.validate.min.js" />
+    <Content Include="JS\layer\layer.js" />
+    <Content Include="JS\layer\mobile\layer.js" />
+    <Content Include="JS\layer\mobile\need\layer.css" />
+    <Content Include="JS\layer\skin\default\icon-ext.png" />
+    <Content Include="JS\layer\skin\default\icon.png" />
+    <Content Include="JS\layer\skin\default\layer.css" />
+    <Content Include="JS\layer\skin\default\loading-0.gif" />
+    <Content Include="JS\layer\skin\default\loading-1.gif" />
+    <Content Include="JS\layer\skin\default\loading-2.gif" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ar.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.az.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.bg.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.bn.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ca.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.cs.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.da.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.de.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ee.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.el.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.es.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.fi.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.fr.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.he.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.hr.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.hu.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.hy.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.id.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.is.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.it.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ja.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ka.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ko.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.lt.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.lv.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ms.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.nb.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.nl.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.no.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.pl.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.pt-BR.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.pt.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ro.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.rs-latin.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.rs.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ru.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.sk.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.sl.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.sv.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.sw.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.th.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.tr.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.ua.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.uk.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="JS\locales\bootstrap-datetimepicker.zh-TW.js" />
+    <Content Include="JS\main.js" />
+    <Content Include="JS\mainwidth.js" />
+    <Content Include="JS\modernizr-2.6.2.js" />
+    <Content Include="JS\page.js" />
+    <Content Include="JS\public.js" />
+    <Content Include="JS\respond.js" />
+    <Content Include="JS\respond.min.js" />
+    <None Include="Properties\PublishProfiles\docom.pubxml" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="JS\trchecked.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="System.Web.Http.dll" />
+    <Content Include="文档\Market.txt" />
+    <Content Include="Files\Menus.json" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="文档\关思语开发平台规划.xlsx" />
+    <Content Include="文档\模块列表.xlsx" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\AccManage\AddAdmin.cshtml" />
+    <Content Include="Views\AccManage\AddDeveloper.cshtml" />
+    <Content Include="Views\AccManage\Administrator.cshtml" />
+    <Content Include="Views\AccManage\Developer.cshtml" />
+    <Content Include="Views\AccManage\UserProfile.cshtml" />
+    <Content Include="Views\ApplicationRight\Assignperm.cshtml" />
+    <Content Include="Views\ApplicationRight\AuthorityManage.cshtml" />
+    <Content Include="Views\DevManage\AddDVR.cshtml" />
+    <Content Include="Views\DevManage\AddESensor.cshtml" />
+    <Content Include="Views\DevManage\AddLED.cshtml" />
+    <Content Include="Views\DevManage\AddM4Channel.cshtml" />
+    <Content Include="Views\DevManage\AddMark.cshtml" />
+    <Content Include="Views\DevManage\AddParkStroe.cshtml" />
+    <Content Include="Views\DevManage\AddSelfCabine.cshtml" />
+    <Content Include="Views\DevManage\AddTicket.cshtml" />
+    <Content Include="Views\DevManage\AddTVM.cshtml" />
+    <Content Include="Views\DevManage\DeviceConfig.cshtml" />
+    <Content Include="Views\DevManage\DVR.cshtml" />
+    <Content Include="Views\DevManage\ESensor.cshtml" />
+    <Content Include="Views\DevManage\JsonTicket.cshtml" />
+    <Content Include="Views\DevManage\LED.cshtml" />
+    <Content Include="Views\DevManage\M4Channel.cshtml" />
+    <Content Include="Views\DevManage\ParkStroe.cshtml" />
+    <Content Include="Views\DevManage\SelfCabine.cshtml" />
+    <Content Include="Views\DevManage\Ticket.cshtml" />
+    <Content Include="Views\DevManage\TVM.cshtml" />
+    <Content Include="Views\Monitoring\DVRStatus.cshtml" />
+    <Content Include="Views\Monitoring\EquipInteraction.cshtml" />
+    <Content Include="Views\Monitoring\EquipStatus.cshtml" />
+    <Content Include="Views\Monitoring\eSensorLogs.cshtml" />
+    <Content Include="Views\Monitoring\eSensorStatus.cshtml" />
+    <Content Include="Views\Monitoring\Interaction.cshtml" />
+    <Content Include="Views\Monitoring\InteractionPay.cshtml" />
+    <Content Include="Views\Monitoring\LEDLogs.cshtml" />
+    <Content Include="Views\Monitoring\LEDStatus.cshtml" />
+    <Content Include="Views\Monitoring\M4ChannelLogs.cshtml" />
+    <Content Include="Views\Monitoring\M4ChannelStatus.cshtml" />
+    <Content Include="Views\Monitoring\ParkStoreLogs.cshtml" />
+    <Content Include="Views\Monitoring\ParkStoreStatus.cshtml" />
+    <Content Include="Views\Monitoring\SelfCabinet.cshtml" />
+    <Content Include="Views\Monitoring\SelfCabinetLogs.cshtml" />
+    <Content Include="Views\Monitoring\TVMLogs.cshtml" />
+    <Content Include="Views\Monitoring\TVMStatus.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\NoPermission.cshtml" />
+    <Content Include="Views\Report\Detail.cshtml" />
+    <Content Include="Views\Report\DVRReport.cshtml" />
+    <Content Include="Views\Report\ESensorReport.cshtml" />
+    <Content Include="Views\Report\LEDReport.cshtml" />
+    <Content Include="Views\Report\M4ChannelReport.cshtml" />
+    <Content Include="Views\Report\ParkStroeReport.cshtml" />
+    <Content Include="Views\Report\Performance.cshtml" />
+    <Content Include="Views\Report\SelfCabineReport.cshtml" />
+    <Content Include="Views\Report\Statistics.cshtml" />
+    <Content Include="Views\Report\TicketReport.cshtml" />
+    <Content Include="Views\Report\TVMReport.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Monitoring\ShowMap.cshtml" />
+    <Content Include="Views\Monitoring\M4ChannelDetail.cshtml" />
+    <Content Include="Views\Monitoring\TicketDetail.cshtml" />
+    <Content Include="Views\Monitoring\TVMDetail.cshtml" />
+    <Content Include="Views\Monitoring\ParkStoreDetail.cshtml" />
+    <Content Include="Views\Monitoring\SelfCabinetDetail.cshtml" />
+    <Content Include="Views\Monitoring\DVRDetail.cshtml" />
+    <Content Include="Views\Monitoring\LEDDetail.cshtml" />
+    <Content Include="Views\Monitoring\ESensorDetail.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapTicket.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapTVM.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapParkSrore.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapSelfCabinet.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapDVR.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapLED.cshtml" />
+    <Content Include="Views\Monitoring\ShowMapEsensor.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\DevManage\DeviceConfigList.cshtml" />
+    <Content Include="Views\Report\PerformanceFace.cshtml" />
+    <Content Include="Views\Report\PerformancePay.cshtml" />
+    <Content Include="Views\Report\DetailFace.cshtml" />
+    <Content Include="Views\Report\DetailPay.cshtml" />
+    <Content Include="Views\DevManage\LEDConfig.cshtml" />
+    <Content Include="Views\Configuration\ConfigParameter.cshtml" />
+    <Content Include="Views\Home\UpdateIE.cshtml" />
+    <Content Include="Views\Configuration\SubSystemConfig.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <Content Include="JS\jquery-3.1.0.min.map" />
+    <Content Include="JS\jquery-3.1.0.slim.min.map" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>12023</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:12023/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

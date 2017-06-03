@@ -1,0 +1,130 @@
+﻿
+        body {
+    padding: 9px;
+    overflow-x: hidden;
+}
+
+#container-body {
+    width: 100%;
+    border: 1px solid #DFDFDF;
+    background-color: #FFF;
+    height:900px;
+}
+
+    /*/*
+                     * 主体内容头部
+                     */
+    #container-body > .container-header {
+        padding: 10px;
+        border-bottom: 1px solid #DFDFDF;
+    }
+
+        /*
+                     * 左侧导航栏
+                     */
+        #container-body > .container-header > .left {
+            float: left;
+            width: 50%;
+        }
+            /*当前位置图标*/
+            #container-body > .container-header > .left > .breadcrumb-left img {
+                padding: 0 5px 3px 0;
+            }
+
+    #container-body .breadcrumb {
+        padding: 8px 0px;
+        margin-bottom: 0px;
+        background-color: #FFF;
+    }
+
+        #container-body .breadcrumb > li + li:before {
+            content: ">\00a0";
+        }
+
+        #container-body .breadcrumb > li>a {
+            color: #333;
+        }   
+            #container-body .breadcrumb > li > a:focus ,
+            #container-body .breadcrumb > li>a:hover {
+               text-decoration:none;
+               color:#008ECA;
+            }
+        #container-body .breadcrumb .active {
+            color: #333;
+        }    
+            
+
+    #container-body .breadcrumb-left {
+        padding: 8px;
+        float: left;
+    }
+
+
+
+         #container-body > .admintable {
+            padding: 10px;
+            margin-top: 25px;
+            border-bottom:1px solid #DFDFDF;
+        }
+
+            #container-body > .admintable > table {
+                width: 450px;
+                margin: 1px auto;
+            }
+
+                #container-body > .admintable > table tr > td:first-child {
+                    padding: 10px 0px 10px 10px;
+                }
+
+                #container-body > .admintable > table tr > td:last-child {
+                    padding: 10px 10px 10px 0px;
+                }
+                #container-body > .admintable > table tr > td {
+                 padding:10px;
+                }
+                #container-body > .admintable > table td > span {
+                    color: #f00;
+                    padding-right: 2px;
+                }
+
+     
+               #container-body > .container-footer > .container-footer-right {
+                float: right;
+                margin-bottom: 20px;
+            }
+
+            #container-body > .container-footer .container-buton-left {
+                float: left;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+            #container-body > .container-footer .container-buton-right {
+                float: right;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+
+             #container-body .left-edit {
+            float: left;
+            padding: 7px 0 0 10px;
+        }
+
+            #container-body .left-edit .left-edit-title {
+                border-left: #17AEE3 solid 3px;
+                padding-left: 10px;
+            }
+
+        #container-body .right-edit {
+            float: right;
+        }
+        /*#container-body .container-header {
+         margin-top:30px;
+         border-top:1px solid #DFDFDF;
+         font-size:12px;
+        }*/
+        #container-body .right-edit > .btn {
+                border-radius: 15px;
+                outline:none;
+            }

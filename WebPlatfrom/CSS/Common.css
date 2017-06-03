@@ -1,0 +1,55 @@
+        /*添加修改界面内容*/
+            #container-body > .admintable {
+                padding-bottom: 15px;
+            }
+
+                #container-body > .admintable > table {
+                    width: 100%;
+                }
+
+            #container-body .admintable table tr > td {
+                padding-top: 15px;
+                padding-right: 20px;
+            }
+
+                #container-body .admintable table tr > td:nth-of-type(odd) {
+                    padding-right: 0px;
+                    padding-left: 15px;
+                }
+
+            #container-body > .admintable > table td > span {
+                color: #f00;
+                padding-right: 2px;
+            }
+          
+
+            #container-body > .container-footer {
+               
+            }
+
+                #container-body > .container-footer ul li {
+                    float: left;
+                    width: 160px;
+                }
+
+                #container-body > .container-footer > .container-footer-right {
+                    float: right;
+                    margin-top: 30px;
+                }
+
+                #container-body > .container-footer .container-buton-left {
+                    float: left;
+                    width: 100px;
+                    margin-right: 50px;
+                }
+                #container-body > .container-footer .container-buton-left .btn{
+                    outline:none;
+                }
+                #container-body > .container-footer .container-buton-right {
+                    float: right;
+                    width: 100px;
+                    margin-right: 50px;
+                }
+                #container-body > .container-footer .container-buton-right .btn {
+                    outline:none;
+                }

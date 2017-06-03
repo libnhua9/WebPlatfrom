@@ -1,0 +1,199 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/Report.css" rel="stylesheet" />
+    <title>人脸识别报表</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left"><img src="~/Images/current.png" />当前位置 :</span>
+            </div>
+            <div class="left">
+                <ol class="breadcrumb">
+                    <li class="active">分析和报表</li>
+                    <li class="active">性能</li>
+                    <li class="active">人脸识别报表</li>
+                </ol>
+            </div>
+            <div class="container-btn">
+                <a id="btnEdit" onclick="GetTicketPeort(1);">
+                    <img src="~/Images/Report/month2.png" />
+                </a>
+                <a id="btnDel" onclick="GetTicketPeort(2);">
+                    <img src="~/Images/Report/day1.png" />
+                </a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-chartheader">
+            <div class="container-chartleft">人脸识别报表</div>
+            <div class="container-chartright">
+                <p><img src="~/Images/Report/most.png" />最大调用时间:<span id="max"></span>ms</p>
+                <p><img src="~/Images/Report/small.png" />最小调用时间:<span id="min"></span>ms</p>
+                <p><img src="~/Images/Report/daycurr.png" />平均调用时间:<span id="avg"></span>ms</p>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
+        <div id="chartBar">
+
+        </div>
+            @*<div style="clear: both"></div>
+        </div>
+        <div class="container-btn">
+            <a id="btnEdit" class="btn btn-info" onclick="GetTicketPeort(1);">
+                当月
+                <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
+            </a>
+            <a id="btnDel" class="btn btn-info" onclick="GetTicketPeort(2);">
+                当日
+                <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
+            </a>
+        </div>
+        <div>
+
+        </div>
+        <div class="chart-main">
+            <div id="chartBar">
+
+            </div>
+            <div class="container-right">
+                <p>最大调用时间:<span id="max"></span>ms</p>
+                <p>最小调用时间:<span id="min"></span>ms</p>
+                <p>平均调用时间:<span id="avg"></span>ms</p>
+            </div>
+            <div style="clear:both;"></div>
+        </div>*@
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js"></script>
+    <script src="~/JS/echarts.js"></script>
+    @*<script src="~/JS/esl.js"></script>*@
+    <script src="~/JS/public.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script type="text/javascript">
+      
+        $(function () {
+            GetTicketPeort(1);
+        });
+        function GetTicketPeort(type) {
+            var xname;
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('chartBar'));
+            var categories = [];
+            var values = [];
+            if (type == 1) {
+                xname = "日期";
+                var btnmonth = $(".container-btn>#btnEdit");
+                var src = $(btnmonth).find("img").attr("src");
+                if (src == "month2.png") {
+                    src = src.replace("month2.png", "month1.png");
+                    $(btnmonth).find("img").attr("src", src);
+                } else {
+                    src = src.replace("month1.png", "month2.png");
+                    $(btnmonth).find("img").attr("src", src);
+                }
+                var delsrc = $(".container-btn>#btnDel").find("img").attr("src");
+                delsrc = delsrc.replace("day2.png", "day1.png");
+                $(".container-btn>#btnDel").find("img").attr("src", delsrc);
+            } else if (type == 2) {
+                xname = "小时";
+                var btnday = $(".container-btn>#btnDel");
+                var src = $(btnday).find("img").attr("src");
+                if (src == "day2.png") {
+                    src = src.replace("day2.png", "day1.png");
+                    $(btnday).find("img").attr("src", src);
+                } else {
+                    src = src.replace("day1.png", "day2.png");
+                    $(btnday).find("img").attr("src", src);
+                }
+                var editsrc = $(".container-btn>#btnEdit").find("img").attr("src");
+                editsrc = editsrc.replace("month2.png", "month1.png");
+                $(".container-btn>#btnEdit").find("img").attr("src", editsrc);
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Report/GetFaceAPIReport",
+                data: {type: type },
+                async: false, //同步执行
+                dataType: "json",
+                success: function (data) {
+                    categories = data.saveDate.length == 0 ? [0] : data.saveDate;
+                    values = data.count.length == 0 ? [0] : data.count;
+                    $("#max").text(arrMaxNum(data.max) === -Infinity ? 0 : arrMaxNum(data.max));
+                    $("#min").text(arrMinNum(data.min) === Infinity ? 0 : arrMinNum(data.min));
+                    $("#avg").text(arrAverageNum(data.avg));
+                }
+            });
+
+            // 指定图表的配置项和数据
+            var option = {
+                //title: {
+                //    text: '人脸识别'
+                //},
+                tooltip: {},
+                toolbox: {
+                    feature: {
+                        dataView: { show: true, readOnly: false },
+                        magicType: { show: true, type: ['line', 'bar'] },
+                        restore: { show: true },
+                        saveAsImage: { show: true }
+                    }
+                },
+                legend: {
+                    data: ['报表分析']
+                },
+                xAxis: {
+                    name: xname,
+                    //data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                    boundaryGap: false,
+                    data: categories,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: -45, //倾斜度 -90 至 90 默认为0
+                        margin: 20,
+                        textStyle: {
+                            fontWeight: "bolder",
+                            color: "#000000"
+                        }
+                    }
+                },
+                yAxis: {
+                    name: '次数'
+                },
+                series: [{
+                    name: '调用次数',
+                    type: 'line',
+                    //barWidth: 30,
+                    //data: [5, 20, 36, 10, 10, 20]
+                    smooth: true,
+                    itemStyle: { normal: { areaStyle: { type: 'default' } } },
+                    data: values,
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+
+                        ]
+                    }
+                }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+        }
+    </script>
+</body>
+</html>
+

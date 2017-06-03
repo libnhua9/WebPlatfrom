@@ -1,0 +1,149 @@
+﻿
+        /*
+                     * 右侧导 查询搜索
+                     */
+        #container-body > .container-header > .right {
+            float: right;
+            width: 65%;
+        }
+
+            #container-body > .container-header > .right > .input-box {
+                float: right;
+                width: 200px;
+            }
+                #container-body > .container-header > .right > .input-box  .btn-primary {
+                    background-color: #16B6F2;
+                    border-color: #16B6F2;
+                }
+            #container-body > .container-header > .right > .input-search {
+                margin-right: 20px;
+            }
+
+            #container-body > .container-header > .right .dropdown-menu {
+                min-width: 200px;
+            }
+             #container-body > .container-header > .right .dropdown-menu-right > li > a:hover {
+                        background-color: #D0F0FB;
+                        color: #20B1E8;
+                    }
+        /*
+                     * 新增删除修改栏
+                     */
+        #container-body .right-edit {
+            float: right;
+        }
+
+            #container-body .right-edit > .btn {
+                border-radius: 15px;
+                font-size: 12px;
+                outline:none;
+            }
+        /*
+                     * 表格
+                     */
+        #container-body > .container-table thead th {
+            border-right: 1px solid #ddd;
+            width:200px;
+}
+          
+            #container-body > .container-table thead th:last-child {
+                border-right: 0px;
+            }
+
+        #container-body > .container-table .table-striped {
+            margin-bottom: 0px;
+        }
+
+        #container-body > .container-table thead tr {
+            background-color: #E8EDF0;
+            height:38px;
+        }
+
+        #container-body > .container-table {
+        }
+            #container-body .container-table tbody > tr {
+              border:0;
+              height:40px;
+            }
+            #container-body > .container-table .table-striped > tbody > tr:nth-of-type(odd) {
+                background-color: #FFF;
+            }
+
+            #container-body > .container-table .table-striped > tbody > tr:nth-of-type(even) {
+                background-color: #E9F6FC;
+            }
+            #container-body > .container-table .table-striped > tbody>tr>td{
+             border:0 !important;
+             white-space: nowrap;
+            }
+              /*datatable*/
+            #container-body .container-table table.dataTable {
+               margin-top:0px !important;
+            }
+            /*
+             * 显示结果分页栏
+            */
+           #container-body > .container-table .dataTables_info {
+                margin-left:7px;
+          }
+            #container-body > .container-table .dataTables_paginate {
+                margin:20px 14px 0 0;
+            }
+        /*
+        * 分页
+         */
+        #container-body .container-table .pagination li>a{
+            outline:none;
+             border-radius: 5px;
+             border: 0px;
+        }
+        #container-body .container-table .pagination {
+             list-style:none;
+             float:right;
+        }
+        #container-body .container-table .pagination li{
+            float:left;
+            padding-left:10px;
+        }
+            #container-body .container-table .pagination li:first-child > a,
+            #container-body .container-table .pagination li:last-child > a {
+             border:1px solid #ddd;
+            }
+        #container-body .container-table .pagination .active>a{
+                cursor: pointer;
+                background-color: #16B6F2;
+                border-color: #16B6F2;
+        }
+        /*勾选框颜色*/
+        /*#container-body .container-table tbody .center .checkchild:checked{
+            color:red;
+        }*/
+           
+        /*#container-body .table-pager {
+        }
+
+    #paging {
+        margin-right: 20px;
+        float: right;
+    }
+     #container-body .table-pager .pager li {
+      padding-left:2px;
+    }
+    #container-body .table-pager .pager li > a, .pager li > span {
+        border-radius: 5px;
+        border: 0px;
+    }
+
+    #container-body .table-pager .pager li:first-child > a,
+    #container-body .table-pager .pager li:last-child > a,
+    #container-body .table-pager .pager li:first-child > span,
+    #container-body .table-pager .pager li:last-child > span {
+        border: 1px solid #ddd;
+    }
+
+    #container-body .table-pager .pager .active > a {
+        color: #fff;
+        cursor: default;
+        background-color: #16B6F2;
+        border-color: #16B6F2;
+    }*/

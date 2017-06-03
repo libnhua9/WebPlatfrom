@@ -1,0 +1,72 @@
+﻿     #container-body > .admintable {
+            padding: 10px;
+            margin-top: 25px;
+        }
+
+            #container-body > .admintable > table {
+                width: 350px;
+                margin: 1px auto;
+            }
+
+                #container-body > .admintable > table tr > td:first-child {
+                    padding: 10px 0px 10px 10px;
+                }
+
+                #container-body > .admintable > table tr > td:last-child {
+                    padding: 10px 10px 10px 0px;
+                }
+
+                #container-body > .admintable > table td > span {
+                    color: #de1838;
+                    padding-right: 10px;
+                    vertical-align:middle;
+                }
+               
+                #container-body > .admintable > table td > .table-buton-left {
+                    float: left;
+                    width: 100px;
+                    margin-left: 50px;
+                }
+                #container-body > .admintable > table td > .table-buton-left .btn-default{
+                    border-color:#17b3eb;
+                    color:#17b3eb;
+                }
+                #container-body > .admintable > table td > .table-buton-right {
+                    float: right;
+                    width: 100px;
+                    margin-right: 50px;
+                }
+                #container-body > .admintable > table td > .table-buton-right .btn-primary{
+                     background-color:#17b3eb;
+                     border-color:#17b3eb;
+                }
+                 #container-body > .admintable > table td > .statelab {
+                  padding-top:5px;
+                }
+                    #container-body > .admintable > table td > .statelab > .havalab {
+                      margin-left:5px;
+                      font-weight:normal;
+                    }
+                    /*#container-body > .admintable > table td > .statelab > #rulelabel {
+                       background-image: url('../Images/unselect.png');
+                        background-repeat: no-repeat;
+                        background-size: 13px 13px;
+                        display: inline-block;
+                        height: 13px;
+                        width: 13px;
+                        position: absolute;
+                        top: 0.28rem;
+                        left:10px;
+                    }
+               #cbState:checked + label {
+                    background-image: url('../Images/select.png');
+                }
+                    #container-body > .admintable > table td > .statelab > #cbState {
+                        width: 0;
+                        height: 0;
+                        padding: 0;
+                        margin: 0;
+                    }*/
+                #container-body > .admintable > table td > .tr-userlab {
+                 font-weight:normal;
+                }

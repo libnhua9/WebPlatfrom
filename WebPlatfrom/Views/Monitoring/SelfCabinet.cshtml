@@ -1,0 +1,172 @@
+﻿@using Web.EF;
+@using Web.Models.WebModels;
+@{
+    Layout = null;
+    //List<M4Channel> list = ViewBag.list as List<M4Channel>
+    ;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <title>SelfCabinetStatus</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/manager.css" rel="stylesheet" />
+    <link href="~/CSS/Status.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">
+                    <img src="~/Images/current.png" />当前位置:
+                </span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">实时监控</li>
+                        <li class="active">设备状态</li>
+                        <li class="active">储物柜</li>
+                        <li class="active">自助储物柜</li>
+                    </ol>
+                </div>
+
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-headerss">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>设备真实存在  (温馨提示：浅绿色表示设备在线)</span></div>
+            </div>
+            <div style="clear: both"></div>
+
+        </div>
+        <div id="main">
+           
+        </div>
+        <div style="clear: both"></div>
+        <div class="container-headers">
+            <div class="left-edit">
+                <div class="left-edit-title"><span>设备不真实存在</span></div>
+            </div>
+            <div style="clear: both"></div>
+
+        </div>
+        <div id="main2">
+
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js"></script>
+    <script src="~/JS/jQuery.plus.js"></script>
+    <script src="~/JS/page.js"></script>
+    <script src="~/JS/public.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            ///定时刷新
+            window.setInterval(getList, 3000);
+            getList();
+            getList2()
+            var content = $("#main").html();
+            if (content == null || content.length == 0 || content == "") {
+                $(".container-headers").css("border-top", "0");
+            } else {
+                $(".container-headerss").css("display", "block");
+            }
+            var contents = $("#main2").html();
+            if (contents == null || contents.length == 0 || contents == "") {
+
+            } else {
+                $(".container-headers").css("display", "block");
+            }
+        });
+        function loadData() {
+        }
+
+        function makeRow(obj) {
+            if (comptime(convertTime(obj.LastUpdate, "yyyy-MM-dd hh:mm:ss"))) {
+                var $div = $("<div class=\"div-left\"style=\"background-color:#D0F0FB\" />");
+            } else {
+                var $div = $("<div class=\"div-left\" />");
+            }
+            var $divleftl = $("<div class=\"div-leftl\"><img src=\"../../Images/shebeitu.png\" /></div>");
+            var $divleftr = $("<div class=\"div-leftr\"/>");
+            var $lab = $("<lab/>").text("设备名称：");
+            var $br = $("<br/>");
+            var $br1 = $("<br/>");
+            var $br2 = $("<br/>");
+            var $br3 = $("<br/>");
+            var $br4 = $("<br/>");
+            var $br5 = $("<br/>");
+            var $br6 = $("<br/>");
+            var $lab1 = $("<lab/>").text(obj.DeviceName);
+            var $lab2 = $("<lab/>").text("类型：");
+            var $lab3 = $("<lab/>").text("1");
+            var $lab4 = $("<lab/>").text("状态：");
+            var $lab5 = $("<lab/>").text("1");
+            var $lab6 = $("<lab/>").text("启动日期：");
+            var $lab7 = $("<lab/>").text(convertTime(obj.StartDate, "yyyy-MM-dd hh:mm:ss"));
+            var $lab8 = $("<lab/>").text("IP地址：");
+            var $lab9 = $("<lab/>").text(obj.IPAddress);
+            var $lab14 = $("<lab/>").text("更新时间：");
+            var $lab15 = $("<lab/>").text(convertTime(obj.LastUpdate, "yyyy-MM-dd hh:mm:ss"));
+            $divleftr.append($lab).append($lab1).append($br).append($lab2).append($lab3).append($br1).append($lab4).append($lab5).append($br2).append($lab6).append($lab7).append($br3).append($lab14).append($lab15).append($br6).append($lab8).append($lab9);
+            $div.append($divleftl).append($divleftr);
+            return $div;
+        }
+        function makeRow2(obj) {
+            var $div = $("<div class=\"div-left\" />");
+            var $divleftl = $("<div class=\"div-leftl\"><img src=\"../../Images/shebeitu.png\" /></div>");
+            var $divleftr = $("<div class=\"div-leftr\"/>");
+            var $lab = $("<lab/>").text("设备名称：");
+            var $br = $("<br/>");
+            var $lab1 = $("<lab/>").text(obj.DeviceName);
+            var $lab2 = $("<lab/>").text("序列号：");
+            var $lab3 = $("<lab/>").text(obj.DeviceSN);
+            //.append($lab2).append($lab3).append($br1).append($lab4).append($lab5).append($br2)
+            $divleftr.append($lab).append($lab1).append($br).append($lab2).append($lab3);
+            $div.append($divleftl).append($divleftr);
+            return $div;
+        }
+        //刷新
+        function getList() {
+            $.HttpPost("/Monitoring/GetStatusSelfCabinetList", {}, function (data) {
+                if (data.State === 1) {
+                    var $body = $("#main").empty();
+                    var searchResult = data.Data;
+                    $.each(searchResult, function (index, row) {
+                        $body.append(makeRow(row));
+                    });
+
+                    //创建分页
+
+                } else {
+                    alert("查询失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+        function getList2() {
+            $.HttpPost("/Monitoring/GetStatusSelfCabinetNullList", {}, function (data) {
+                if (data.State === 1) {
+                    var $body = $("#main2").empty();
+                    var searchResult = data.Data;
+                    $.each(searchResult, function (index, row) {
+                        $body.append(makeRow2(row));
+                    });
+
+                    //创建分页
+
+                } else {
+                    alert("查询失败。\r\n" + data.Message);
+                }
+            });
+        }
+
+
+    </script>
+    <script src="~/JS/commonheight.js"></script>
+</body>
+</html>

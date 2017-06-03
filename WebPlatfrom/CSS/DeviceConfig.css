@@ -1,0 +1,41 @@
+﻿      /*修改内容*/
+        #container-body > .admintable {
+         display:none;
+       
+        }
+        .admintable > table > tbody > tr {
+            height:42px;
+        }
+            .admintable>table>tbody>tr>td{
+               padding:4px;
+            }
+                .admintable > table > tbody > tr > td select {
+                   width:178px;
+                   height:31px;
+                }
+                .admintable > table > tbody > tr > td span {
+                    color: #f00;
+                    padding-right: 2px;
+                }
+            .admintable .container-footer ul li {
+                float: left;
+                width: 160px;
+            }
+
+           .admintable .container-footer > .container-footer-right {
+                float: right;
+                margin-top: 30px;
+            }
+
+            .admintable .container-footer .container-buton-left {
+                float: left;
+                width: 100px;
+                margin-right: 50px;
+            }
+
+            .admintable .container-footer .container-buton-right {
+                float: right;
+                width: 100px;
+                margin-right: 50px;
+            }
+       

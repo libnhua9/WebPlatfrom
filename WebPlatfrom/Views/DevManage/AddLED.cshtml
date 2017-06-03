@@ -1,0 +1,159 @@
+﻿@using Web.EF
+@{
+    Layout = null;
+    var led = ViewBag.led as Tb_Device_LED;
+    if (led == null){led = new Tb_Device_LED();}
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/Common.css" rel="stylesheet" />
+    <title>添加LED</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">当前位置 :</span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">设备管理</li>
+                        <li class="active">第三方</li>
+                        <li><a href="/DevManage/LED">LED显示屏</a></li>
+                        <li class="active">@ViewBag.Type</li>
+                    </ol>
+                </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable">
+            <input type="hidden" id="Uid" value="@Html.Raw(led?.DeviceID ?? 0)" />
+            <table>
+                <tr>
+                    <td><span>*</span>设备名称:</td>
+                    <td><input type="text" id="DeviceName" class="form-control" value="@Html.Raw(led?.DeviceName)" @Html.Raw(led?.DeviceName != null? "readonly='readonly'":"") ></td>
+                    <td><span>*</span>起始日期:</td>
+                    @*<td><input type="text" id="StartDate" class="form-control" value="@Html.Raw(led?.StartDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input  id="StartDate" class="form-control" type="text" value="@Html.Raw(led.StartDate?.ToString("yyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                    <td><span>*</span>结束日期:</td>
+                    @*<td><input type="text" id="EndDate" class="form-control" value="@Html.Raw(led?.EndDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input  id="EndDate" class="form-control" type="text" value="@Html.Raw(led.EndDate?.ToString("yyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                </tr>
+                <tr>
+                   
+                    @*<td><span>*</span>最后修改日期:</td>
+                        <td><input type="text" id="LastUpdate" class="form-control"></td>*@
+                    <td><span>*</span>IP地址:</td>
+                    <td><input type="text" id="IPAddress" class="form-control" value="@Html.Raw(led?.IPAddress)"></td>
+                    <td><span>*</span>端口:</td>
+                    <td><input type="text" id="Port" class="form-control" value="@Html.Raw(led?.Port)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>
+                    <td><span>*</span>是否启用:</td>
+                    @*<td><input type="text" id="Enabled" class="form-control"> </td>*@
+                    <td><input type="checkbox" value="0" id="Enabled" name="Enabled" checked='checked' @Html.Raw(led?.Enabled == 1 ? "checked='checked'" : "") /> </td>
+                </tr>
+                <tr>
+                        <td><span>*</span>高度:</td>
+                        <td><input type="text" id="Width" class="form-control" value="@Html.Raw(led?.Width)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>
+                        <td><span>*</span>宽度</td>
+                        <td><input type="text" id="Height" class="form-control" value="@Html.Raw(led?.Height)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>
+                        <td><span>*</span>备注</td>
+                        <td><input type="text" id="Remarks" class="form-control" value="@Html.Raw(led?.Remarks)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>
+                    </tr>
+            </table>
+        </div>
+        <div class="container-footer">
+            <div class="container-footer-right">
+                <div class="container-buton-left">
+                    <a class="btn btn-default btn-block" href="/DevManage/LED">返回</a>
+                </div>
+                <div class="container-buton-right">
+                    <a class="btn btn-primary btn-block" onclick="save();">保存</a>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/layer/layer.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.js"></script>
+    <script src="~/JS/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/JS/datecommon.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script src="~/JS/public.js"></script>
+    <script type="text/javascript">
+        //保存数据
+        function save() {
+            var deviceName = $("#DeviceName").val();
+            var startDate = $("#StartDate").val();
+            var endDate = $("#EndDate").val();
+            var iPAddress = $("#IPAddress").val();
+            if (deviceName === "") {
+                //alert("请填写设备名称");
+                layer.msg("请填写设备名称", { icon: 2 });
+                return;
+            }
+            if (startDate === "" || endDate === "") {
+                //alert("请填写时间");
+                layer.msg("请填写时间", { icon: 2 });
+                return;
+            }
+            if (startDate > endDate) {
+                // alert("开始时间不能大于结束时间");
+                layer.msg("开始时间不能大于结束时间", { icon: 2 });
+                return;
+            }
+            if (!isValidIP(iPAddress)) {
+                layer.msg("请填写正确ip地址", { icon: 2 });
+                return;
+            }
+            var led = {
+                DeviceID: $("#Uid").val(),
+                DeviceName: deviceName,
+                StartDate: startDate,
+                EndDate: endDate,
+                Enabled: $("#Enabled").is(":checked") ? 1 : 0,
+                IPAddress: iPAddress,
+                Port: $("#Port").val(),
+                Width: $("#Width").val(),
+                Height: $("#Height").val(),
+                Remarks: $("#Remarks").val()
+
+        };
+            $.HttpPost("/DevManage/SaveLED", { led: led }, function (data) {
+                if (data.State === 1) {
+                    //alert("保存成功.");
+                    layer.msg("保存成功", { icon: 1 });
+                    //跳转到前一页
+                } else {
+                    //alert("保存失败。\r\n" + data.Message);
+                    layer.msg("保存失败\r\n" + data.Message, { icon: 2 });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

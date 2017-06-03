@@ -1,0 +1,214 @@
+﻿@using Web.EF
+@{
+    Layout = null;
+    var ticket = ViewBag.ticket as Tb_Device_Ticket;
+    if (ticket == null) { ticket = new Tb_Device_Ticket(); }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/CSS/BarLeft.css" rel="stylesheet" />
+    <link href="~/CSS/Common.css" rel="stylesheet" />
+    <title>添加安全检票闸机</title>
+</head>
+<body>
+    <div id="container-body">
+        <div class="container-header">
+            <div class="left">
+                <span class="breadcrumb-left">当前位置 :</span>
+                </div>
+                <div class="left">
+                    <ol class="breadcrumb">
+                        <li class="active">设备管理</li>
+                        <li class="active">通道设备</li>
+                        <li><a href="/DevManage/Ticket">安全检测闸机</a></li>
+                        <li class="active">@ViewBag.Type</li>
+                    </ol>
+                </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="admintable">
+            <input type="hidden" id="DeviceID" value="@Html.Raw(ticket?.DeviceID ?? 0)" />
+            <input type="hidden" id="sysType" value="@Html.Raw(ticket?.SystemType)" />
+            <input type="hidden" id="hDvr" value="@Html.Raw(ticket?.DvrID)" />
+            <input type="hidden" id="hLed" value="@Html.Raw(ticket?.LedID)" />
+            <table>
+                <tr>
+                    <td><span>*</span>设备序列号:</td>
+                    <td><input type="text" id="DeviceSN" class="form-control" value="@Html.Raw(ticket?.DeviceSN)" @Html.Raw(ticket?.DeviceSN != null ? "readonly='readonly'" : "")></td>
+                    <td><span>*</span>设备名称:</td>
+                    <td><input type="text" id="DeviceName" class="form-control" value="@Html.Raw(ticket?.DeviceName)"></td>
+                    <td><span>*</span>起始日期:</td>
+                    @*<td><input type="text" id="StartDate" class="form-control" value="@Html.Raw(ticket?.StartDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="StartDate" class="form-control" type="text" value="@Html.Raw(ticket.StartDate?.ToString("yyyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                    <td><span>*</span>结束日期:</td>
+                    @*<td><input type="text" id="EndDate" class="form-control" value="@Html.Raw(ticket?.EndDate)"></td>*@
+                    <td>
+                        <div class="input-group date form_date" initialDate data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="EndDate" class="form-control" type="text" value="@Html.Raw(ticket.EndDate?.ToString("yyyy-MM-dd"))" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>*</span>系统类型:</td>
+                    @*<td><input type="text" id="SystemType" class="form-control" value="@Html.Raw(ticket?.SystemType)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>*@
+                   
+                     <td>
+                        <select id="SystemType" class="form-control">
+                            <option value="0">WindowsCE</option>
+                            <option value="1">Android</option>
+                            <option value="2">IMX6Q</option>
+                        </select>
+                    </td>
+                    <td><span>*</span>关联摄像头:</td>
+                    @*<td><input type="text" id="DvrID" class="form-control" value="@Html.Raw(ticket?.DvrID)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>*@
+                    <td>
+                        <select id="DvrID" class="form-control">
+                            @*<option value="0">WindowsCE</option>
+                                <option value="1">Android</option>*@
+                            <option value="">--请选择--</option>
+                        </select>
+                    </td>
+                    <td><span>*</span>关联ELED屏:</td>
+                    @*<td><input type="text" id="LedID" class="form-control" value="@Html.Raw(ticket?.LedID)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>*@
+
+                    <td>
+                        <select id="LedID" class="form-control">
+                            @*<option value="0">WindowsCE</option>
+                                <option value="1">Android</option>*@
+                            <option value="">--请选择--</option>
+                        </select>
+                    </td>
+                    <td><span>*</span>是否启用:</td>
+                    <td><input type="checkbox" value="0" id="Enabled" name="Enabled" checked='checked'  @Html.Raw(ticket?.Enabled == 1 ? "checked='checked'" : "") /> </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container-footer">
+            <div class="container-footer-right">
+                <div class="container-buton-left">
+                    <a class="btn btn-default btn-block" href="/DevManage/Ticket">返回</a>
+                </div>
+                <div class="container-buton-right">
+                    <button class="btn btn-primary btn-block" onclick="save();">保存</button>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+    <script src="~/JS/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="~/JS/layer/layer.js"></script>
+    <script src="~/JS/jQuery.plus.js" type="text/javascript"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.js"></script>
+    <script src="~/JS/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/JS/datecommon.js"></script>
+    <script src="~/JS/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/JS/commonheight.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#SystemType").val($("#sysType").val());
+            GetDvrOrLed();
+           
+        });
+
+        //保存数据
+        function save() {
+            var deviceSN = $("#DeviceSN").val();
+            var deviceName = $("#DeviceName").val();
+            var startDate = $("#StartDate").val();
+            var endDate = $("#EndDate").val();
+            var iPAddress = $("#IPAddress").val();
+            if (deviceSN === "") {
+                //alert("请填写设备名称");
+                layer.msg("请填写设备序列号", { icon: 2 });
+                return;
+            }
+            if (deviceName === "") {
+                //alert("请填写设备名称");
+                layer.msg("请填写设备名称", { icon: 2 });
+                return;
+            }
+            if (startDate === "" || endDate === "") {
+                //alert("请填写时间");
+                layer.msg("请填写时间", { icon: 2 });
+                return;
+            }
+            if (startDate > endDate) {
+                // alert("开始时间不能大于结束时间");
+                layer.msg("开始时间不能大于结束时间", { icon: 2 });
+                return;
+            }
+            var ticket = {
+                DeviceID: $("#DeviceID").val(),
+                DeviceSN: deviceSN,
+                DeviceName: deviceName,
+                StartDate: startDate,
+                EndDate: endDate,
+                Enabled: $("#Enabled").is(":checked") ? 1 : 0,
+                SystemType: $("#SystemType option:selected").val(),
+                DvrID: $("#DvrID").val(),
+                LedID: $("#LedID").val()
+
+            };
+            $.HttpPost("/DevManage/SaveTicket",
+                { ticket: ticket },
+                function (data) {
+                    if (data.State === 1) {
+                        //alert("保存成功.");
+                        layer.msg("保存成功", { icon: 1 });
+                        //跳转到前一页
+                    } else {
+                        //alert("保存失败。\r\n" + data.Message);
+                        layer.msg("保存失败\r\n" + data.Message, { icon: 2 });
+                    }
+                });
+        }
+
+        function GetDvrOrLed() {
+
+            $.ajax({
+                type: "GET",
+                url: "/DevManage/GetDvrOrLed",
+                typeData: "json",
+                success: function (data) {
+                    if (data.dvr != null && data.dvr.length > 0) {
+                        //循环遍历 下拉框绑定
+                        $.each(data.dvr, function (key, data) {
+                            //第一种方法
+                            $("#DvrID").append("<option value='" + data.DeviceID + "'>" + data.DeviceName + "</option>");
+                            $("#DvrID").val($("#hDvr").val());
+                        });
+                    }
+                    if (data.led != null && data.led.length > 0) {
+                        //循环遍历 下拉框绑定
+                        $.each(data.led, function (key, data) {
+                            //第一种方法
+                            $("#LedID").append("<option value='" + data.DeviceID + "'>" + data.DeviceName + "</option>");
+                            $("#LedID").val($("#hLed").val());
+                        });
+
+                    }
+                }
+                
+            });
+        }
+        
+    </script>
+</body>
+</html>

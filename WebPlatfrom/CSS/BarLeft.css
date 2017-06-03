@@ -1,0 +1,98 @@
+﻿body {
+    padding: 9px 9px 0 9px;
+    overflow-x: hidden;
+}
+
+#container-body {
+    width: 100%;
+    min-width:1100px;
+    border: 1px solid #DFDFDF;
+    background-color: #FFF;
+}
+
+    /*
+                     * 主体内容头部
+                     */
+    #container-body > .container-header {
+        padding: 10px;
+        border-bottom: 1px solid #DFDFDF;
+    }
+
+        /*
+                     * 左侧导航栏
+                     */
+        #container-body > .container-header > .left {
+            float: left;
+        }
+            /*当前位置图标*/
+            #container-body > .container-header > .left > .breadcrumb-left img {
+                padding: 0 5px 3px 0;
+            }
+
+    #container-body .breadcrumb {
+        padding: 8px 0px;
+        margin-bottom: 0px;
+        background-color: #FFF;
+    }
+
+        #container-body .breadcrumb > li + li:before {
+            content: ">\00a0";
+        }
+
+        #container-body .breadcrumb > li>a {
+            color: #333;
+        }   
+            #container-body .breadcrumb > li > a:focus ,
+            #container-body .breadcrumb > li>a:hover {
+               text-decoration:none;
+               color:#008ECA;
+            }
+        #container-body .breadcrumb .active {
+            color: #333;
+        }    
+            
+
+    #container-body .breadcrumb-left {
+        padding: 8px;
+        float: left;
+    }
+                   #btncheck {
+                float: right;
+            }
+            #inputshu {
+                float: left;
+                width: 200px;
+                margin-right: 20px;
+            }
+
+            .divchoose {
+                float: right;
+                width: 275px;
+            }
+
+
+            .divdate {
+                float: right;
+                width: 457px;
+                margin-right: 20px;
+            }
+            .spandate {
+                float: left;
+                padding: 5px 5px 0 0;
+            }
+            .divleft {
+                float: left;
+                width: 180px;
+            }
+            .divright {
+                float: left;
+                width: 180px;
+                padding-left: 10px;
+            }
+            .divto {
+                float: left;
+                padding: 5px 2px 0 10px;
+            }
+                    #container-body .dataTables_info {
+                        display:none;
+                    }
