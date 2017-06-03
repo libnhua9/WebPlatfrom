@@ -667,6 +667,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\WebModels\ActionJsonResult.cs" />
+    <Compile Include="Models\WebModels\AdModel.cs" />
     <Compile Include="Models\WebModels\DeviceAllocation.cs" />
     <Compile Include="Models\WebModels\DeviceMode.cs" />
     <Compile Include="Models\WebModels\LoginParam.cs" />
