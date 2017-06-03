@@ -185,6 +185,7 @@
     <Compile Include="Commons\NoAuthAttribute.cs" />
     <Compile Include="Commons\WebAuthAttribute.cs" />
     <Compile Include="Controllers\AccManageController.cs" />
+    <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\ApplicationRightController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DevManageController.cs" />
@@ -1033,6 +1034,10 @@
     <Content Include="Views\Home\UpdateIE.cshtml" />
     <Content Include="Views\Configuration\SubSystemConfig.cshtml" />
     <Content Include="Views\Shared\_LayoutPage.cshtml" />
+    <Content Include="Views\Ad\AddLedAd.cshtml" />
+    <Content Include="Views\Ad\LED.cshtml" />
+    <Content Include="Views\Ad\LedAd.cshtml" />
+    <Content Include="Views\Ad\LedAdEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
