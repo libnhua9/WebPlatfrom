@@ -3,7 +3,7 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
     <title>LED广告</title>
@@ -72,12 +72,9 @@
                     删除
                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 </a>
-                <a id="Button1" class="btn btn-warning" onclick="AddMark()">
-                    标注
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                </a>
-                <a id="Button1" class="btn btn-primary" onclick="onDeviceConfig();">
-                    设备配置
+                
+                <a id="Button1" class="btn btn-primary" onclick="onAdAllot();">
+                    广告分配
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </a>
             </div>
@@ -107,16 +104,21 @@
                 $("#input-li").val($item.html()).attr("roleId", $item.attr("roleId"));
             });
             GetList();
-            $('#tblTicketList').on("click", ".checkall", function () {
+            $('#tblLedAdList').on("click", ".checkall", function () {
                 var check = $(this).prop("checked");
                 $(".checkchild").prop("checked", check);
             });
-            //$("#tblTicketList_info").remove();
         });
         //LED加载数据
         function GetList() {
-            $(".container-table").html(' <table class="table table-striped tabtr" id="tblTicketList"></table>');
-            $("#tblTicketList").dataTable({
+            var ad = {
+                AdName:$(".inputsearch").val(),
+                Begin:$("#txtStart").val(),
+                End:$("#txtEnd").val()
+
+            };
+            $(".container-table").html(' <table class="table table-striped tabtr" id="tblLedAdList"></table>');
+            $("#tblLedAdList").dataTable({
                 "bProcessing": true, //DataTables载入数据时，是否显示‘进度’提示
                 "bServerSide": true, //是否启动服务器端数据导入
                 //"bLengthChange": true,//去掉每页多少条框体
@@ -131,8 +133,7 @@
                 "ajax": {
                     "url": "/Ad/GetLedAdList",
                     "type": "POST",
-                    "data": { DeviceName: $(".inputsearch").val(), starts: $("#txtStart").val(), end: $("#txtEnd").val() }
-                    //"data": { DeviceName: $("#inputsearch").val(), Type: $("input[name='roleId']").attr("roleId"),start: start,end:end}
+                    "data": {ad:ad }
                 },
                 "aoColumns": [
                         {
@@ -143,43 +144,85 @@
                             "bSortable": false
                         },
                          {
-                             "mDataProp": "DeviceSN",
-                             "sTitle": "设备序列号",
+                             "mDataProp": "CompanyName",
+                             "sTitle": "公司名称",
                              "sDefaultContent": "",
                              "sClass": "center"
                          },
                         {
-                            "mDataProp": "DeviceName",
-                            "sTitle": "设备名称",
+                            "mDataProp": "AdName",
+                            "sTitle": "广告名称",
                             "sDefaultContent": "",
                             "sClass": "centername"
                         },
                         {
-                            "mDataProp": "SystemType",
-                            "sTitle": "系统类型",
+                            "mDataProp": "Total",
+                            "sTitle": "屏幕总宽度",
                             "sDefaultContent": "",
-                            "sClass": "centername", render: function (data) {
-                                var type = data === 0 ?
-                                    "WindowsCE" : data === 1 ?
-                                    "Android" : data === 2 ?
-                                    "IMX6Q" : "";
-                                return  type;
-                            }
+                            "sClass": "centername"
                         },
                        {
-                           "mDataProp": "StartDate", "sTitle": "开始时间","sDefaultContent": "","sClass": "center", render: function (data) {
-                               return ChangeDateFormatToLocaleDate(data);
-                           }
+                           "mDataProp": "Y",
+                           "sTitle": "高度",
+                           "sDefaultContent": "",
+                           "sClass": "center"
                        },
                         {
-                            "sTitle": "结束时间", "mDataProp": "EndDate", render: function (data) {
-                                return ChangeDateFormatToLocaleDate(data);
+                            "mDataProp": "X",
+                            "sTitle": "宽带",
+                            "sDefaultContent": "",
+                            "sClass": "center"
+                        }, {
+                            "mDataProp": "Contents",
+                            "sTitle": "内容",
+                            "sDefaultContent": "",
+                            "sClass": "center"
+                        }, {
+                            "mDataProp": "DateEnable",
+                            "sTitle": "时间启用状态",
+                            "sDefaultContent": "",
+                            "sClass": "center"
+                        }, {
+                            "mDataProp": "WeatherEnable",
+                            "sTitle": "天气启用状态",
+                            "sDefaultContent": "",
+                            "sClass": "center"
+                        }, {
+                            "mDataProp": "PushPlanConfig",
+                            "sTitle": "推送计划",
+                            "sDefaultContent": "",
+                            "sClass": "center", render: function (data) {
+                                var d = eval('' + data + '')
+                                var array = new Array();
+                                for (var i = 0; i < d.length; i++) {
+                                    array.push(d[i].timeQuantum);
+                                }
+                                return array;
                             }
-                        },
-                        {
-                            "sTitle": "设备是否启用", "mDataProp": "Enabled","sDefaultContent": "", "sClass": "center", render: function (data) {
-                                return data === 1 ? "是" : "否";
+                        }, {
+                            "mDataProp": "SendEnable",
+                            "sTitle": "发送状态",
+                            "sDefaultContent": "",
+                            "sClass": "center"
+                        }, {
+                            "mDataProp": "SaveDate",
+                            "sTitle": "保存时间",
+                            "sDefaultContent": "",
+                            "sClass": "center", render: function (data) {
+                                return convertTime(data, "yyyy-MM-dd hh:mm:ss");
                             }
+                        }, {
+                            "mDataProp": "LastUpdate",
+                            "sTitle": "更新时间",
+                            "sDefaultContent": "",
+                            "sClass": "center", render: function (data) {
+                                return convertTime(data, "yyyy-MM-dd hh:mm:ss");
+                            }
+                        }, {
+                            "mDataProp": "Rmearks",
+                            "sTitle": "备注",
+                            "sDefaultContent": "",
+                            "sClass": "center"
                         }
 
                 ], "language": {
@@ -188,7 +231,6 @@
                     "zeroRecords": "没有匹配结果",
                     "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
                     "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-
                     "emptyTable": "没有匹配结果",
                     "loadingRecords": "载入中...",
                     "thousands": ",",
@@ -199,7 +241,7 @@
                         "last": "末页"
                     },
                     rowCallback: function (row, data, index) {
-                        var ck = $('#tblTicketList').find('input[class="checkall"]');
+                        var ck = $('#tblLedAdList').find('input[class="checkall"]');
                         var bl = $(ck).is(':checked');
                         if (bl) {
                             $(ck).click();
@@ -229,26 +271,20 @@
                 $.loadPage("/DevManage/DeviceConfig/" + id);
             }
         };
-        //地图标记  lbh
-        function AddMark() {
+        //广告分配
+        function onAdAllot() {
             if ($(".checkchild:checked").length !== 1) {
                 //alert("请选择一条数据！"); return;
                 layer.alert("请选择一条数据", { icon: 3 }); return;
             }
             var $obj = $(".checkchild:checked").val();
             if ($obj) {
-                debugger;
-                var name=$(".checkchild:checked").parent().siblings(".centername").text();
-                var id = $obj;
-                // $.loadPage("/DevManage/AddMark/" + id + "/Ticket");
-                layer.open({
-                    type: 2,
-                    title: name,
-                    maxmin: true,
-                    shadeClose: true, //点击遮罩关闭层
-                    area: ['540px', '600px'],
-                    content: "/DevManage/AddMark/" + id + "/Ticket"
+                var id_array = new Array();
+                $('input[name="id"]:checked').each(function () {
+                    id_array.push($(this).val());//向数组中添加元素
                 });
+                var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串
+                $.loadPage("/Ad/LED?idstr=" + idstr);
             }
         };
 

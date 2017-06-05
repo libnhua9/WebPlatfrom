@@ -972,13 +972,35 @@
             "Index": "2"
           }
           ,
-            {
-                "Name": "子系统配置",
-                "Icon": "/ConfigurationImg/shouquan2.png",
-                "Link": "/Configuration/SubSystemConfig",
-                "Level": "0,1,2",
-                "Index": "2"
-            }
+          {
+            "Name": "子系统配置",
+            "Icon": "/ConfigurationImg/shouquan2.png",
+            "Link": "/Configuration/SubSystemConfig",
+            "Level": "0,1,2",
+            "Index": "2"
+          },{
+                    "Name": "设备广告",
+                    "Icon": "",
+                    "Link": "",
+                    "Level": "0,1,2",
+                    "Index": "2",
+                    "Items": [
+                        {
+                          "Name": "LED",
+                          "Icon": "",
+                          "Link": "/Ad/LedAd",
+                          "Level": "0,1,2",
+                          "Index": "2"
+                        },
+                      {
+                        "Name": "LED设备广告分配明显",
+                        "Icon": "",
+                        "Link": "/Ad/LedAdDetailed",
+                        "Level": "0,1,2",
+                        "Index": "2"
+                      }
+                     ]
+                  }
         ]
     }
 ]
