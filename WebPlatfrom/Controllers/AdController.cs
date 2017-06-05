@@ -144,8 +144,10 @@ namespace Web.Controllers
         #endregion
 
 
+        #region 自助储物柜
 
 
+        #region 自助储物柜分配信息
         public ActionResult GetSelfCabinet(AdModel ad)
         {
             var start = Convert.ToInt32(Request["start"]);
@@ -215,5 +217,13 @@ namespace Web.Controllers
                 }
             }
         }
+        #endregion
+
+        #region 
+
+        #endregion
+
+
+        #endregion
     }
 }
