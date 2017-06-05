@@ -184,10 +184,10 @@ namespace Web.Controllers
                     var count = data.Count();
                     var o = new
                     {
-                        draw = 0,
-                        recordsTotal = 0,
-                        recordsFiltered = 0,
-                        data = 0
+                        draw = draw,
+                        recordsTotal = count,
+                        recordsFiltered = count,
+                        data = data
                     };
                     return Json(o, JsonRequestBehavior.AllowGet);
                 }
@@ -206,17 +206,14 @@ namespace Web.Controllers
                     var count = data.Count();
                     var o = new
                     {
-                        draw = 0,
-                        recordsTotal = 0,
-                        recordsFiltered = 0,
-                        data = 0
+                        draw = draw,
+                        recordsTotal = count,
+                        recordsFiltered = count,
+                        data = data
                     };
                     return Json(o, JsonRequestBehavior.AllowGet);
                 }
-
             }
-            //return View();
         }
-
     }
 }
